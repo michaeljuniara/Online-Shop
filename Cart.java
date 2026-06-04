@@ -3,6 +3,7 @@ import java.util.ArrayList;
 
 public class Cart {
     private List<CartItem> items;
+    private Voucher voucher;
 
     public Cart(List<CartItem> items) {
         this.items = items;
@@ -21,6 +22,14 @@ public class Cart {
 
         items.remove(itemNumber);
         return true;
+    }
+
+    public Voucher getVoucher() {
+        return this.voucher;
+    }
+
+    public void setVoucher(Voucher voucher) {
+        this.voucher = voucher;
     }
 
     public void clear() {
