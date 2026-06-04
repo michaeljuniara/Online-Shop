@@ -18,7 +18,10 @@ public class Voucher {
     }
 
     public double use() {
-        if (isValid()) return nominal;
+        if (isValid()) {
+            --remainingUsage;
+            return nominal;
+        }
         else return 0.0;
     }
 }

@@ -32,7 +32,7 @@ public class Cart {
         this.voucher = voucher;
     }
 
-    public void clear() {
+    public void clearItems() {
         this.items.clear();
     }
 
@@ -44,5 +44,9 @@ public class Cart {
         }
 
         return total;
+    }
+
+    public void buy() {
+        
     }
 }
