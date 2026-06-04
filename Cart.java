@@ -1,4 +1,5 @@
 import java.util.List;
+import java.time.LocalDate;
 
 public class Cart {
     private List<CartItem> items;
@@ -45,7 +46,13 @@ public class Cart {
         return total;
     }
 
-    public void buy() {
-        Transaction t = new Transaction();
+    public Transaction buy(User recipient) {
+        Transaction t = new Transaction(LocalDate.now(), recipient, Transaction.Type.BUY);
+    
+        for (CartItem cartItem : items) {
+            t.addOrder(new Order(cartItem));
+        }
+
+        return t;
     }
 }
