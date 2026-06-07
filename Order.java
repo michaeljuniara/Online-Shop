@@ -1,4 +1,4 @@
-public class Order {
+public class Order implements OrderSubject {
     public enum Status { PACKING, DELIVERING, ARRIVED }
 
     private Status orderStatus;
@@ -8,19 +8,23 @@ public class Order {
 
     public Order(CartItem item, User buyer) {
         this.item = item;
-        this.buyer = buyer;
         this.seller = item.getProduct().getOwner();
         setStatus(Status.PACKING);
+        setObserver(buyer);
     }
     
     public void setStatus(Status newStatus) {
         orderStatus = newStatus;
         
-        if (buyer != null) {
-            buyer.onStatusChanged(this, orderStatus);
-        }
+        if (buyer != null) notifyObserver();
     }
 
+    @Override
+    public void notifyObserver() {
+        buyer.onStatusChanged(this, orderStatus);
+    }
+
+    @Override
     public void setObserver(OrderObserver observer) {
         this.buyer = observer;
     }
