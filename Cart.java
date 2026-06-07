@@ -1,15 +1,19 @@
 import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Cart {
     private List<CartItem> items;
+    private Voucher voucher;
 
-    public Cart(List<CartItem> items) {
-        this.items = items;
+    public Cart() {
+        this.items = new ArrayList<>();
     }
     
-    public void addItem(CartItem item) {
-        this.items.add(item);
+    public void addItem(Product product, int quantity) {
+        CartItem ci = new CartItem(product, quantity);
+
+        items.add(ci);
     }
 
     public boolean removeItem(int itemNumber) {
@@ -19,7 +23,11 @@ public class Cart {
         return true;
     }
 
-    public void clearItems() {
+    public void setVoucher(Voucher voucher) {
+        this.voucher = voucher;
+    }
+
+    public void clearCart() {
         this.items.clear();
     }
 
@@ -34,4 +42,5 @@ public class Cart {
     }
 
     public List<CartItem> getItems() { return Collections.unmodifiableList(this.items); }
+    public Voucher getVoucher() { return voucher; }
 }

@@ -16,16 +16,9 @@ public class Product implements CategoryComponent {
         this.description = description;
         this.price = price;
         this.stock = stock;
-        ShopDB.getDB().addProduct(this);
     }
 
-    public void getProducts(List<Product> list) {
-        list.add(this);
-    }
-
-    public boolean isActive() {
-        return active;
-    }
+    public void getProducts(List<Product> list) { list.add(this); }
 
     public void deactivate() {
         active = false;
@@ -61,6 +54,7 @@ public class Product implements CategoryComponent {
         stock += amount;
     }
 
+    public boolean isActive() { return active; }
     public String getName() { return name; }
     public String getDescription() { return description; }
     public double getPrice() { return price; }

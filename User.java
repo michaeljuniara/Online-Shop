@@ -5,7 +5,6 @@ import java.util.Collections;
 public class User implements OrderObserver {
     private String username;
     private String password;
-    private List<Product> products;
     private Cart shoppingCart;
 
     // buyer & seller
@@ -17,32 +16,11 @@ public class User implements OrderObserver {
         this.username = username;
         this.password = password;
 
-        products = new ArrayList<>();
-        shoppingCart = new Cart(new ArrayList<>());
+        shoppingCart = new Cart();
 
         buyTransactions = new ArrayList<>();
         sellOrders = new ArrayList<>();
         notifications = new ArrayList<>();
-    }
-    
-    public void deactivateProduct(int i) {
-        products.get(i).deactivate();
-    }
-
-    public void newProduct(Product product) {
-        products.add(product);
-        ShopDB.getDB().addProduct(product);
-    }
-
-    public void editProduct(int i, String name, Category category, String description, double price, int stock) {
-        if (i >= 1 && i <= products.size()) {
-            Product p = products.get(i - 1);
-            p.setName(name);
-            p.setCategory(category);
-            p.setDescription(description);
-            p.setPrice(price);
-            p.setStock(stock);
-        }
     }
 
     public void addBuyTransaction(Transaction transaction) {
@@ -77,7 +55,6 @@ public class User implements OrderObserver {
     public String getUsername() { return username; }
     public String getPassword() { return password; } 
     public Cart getCart() { return shoppingCart; }
-    public List<Product> getProducts() { return Collections.unmodifiableList(products); }
     public List<Transaction> getBuyTransactions() { return Collections.unmodifiableList(buyTransactions); }
     public List<Notification> getNotifications() { return Collections.unmodifiableList(notifications); }
     public List<Order> getSellOrders() { return Collections.unmodifiableList(sellOrders); }
