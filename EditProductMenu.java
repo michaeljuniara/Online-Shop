@@ -1,4 +1,6 @@
-class CreateProductMenu implements MenuState{
+class EditProductMenu implements MenuState{
+    Product product;
+    
     @Override
     public void execute(AppContext context){
         User user = context.getUser();
@@ -11,7 +13,7 @@ class CreateProductMenu implements MenuState{
         CategoryPicker cpm = new CategoryPicker();
         cpm.chooseCategory(context);
         Category category = cpm.getChosenCategory();
-
+        
         System.out.println("Deskripsi?");
         String description = context.sc.next();
 
@@ -23,7 +25,7 @@ class CreateProductMenu implements MenuState{
 
         //pilihannya adalah untuk buat produk atau kembali ke product management menu (Cancel)
         String menuTemplate = """
-                    1.  Create
+                    1.  Confirm edit
                     2.  Cancel
                 """;
         boolean loop = false;
@@ -35,13 +37,12 @@ class CreateProductMenu implements MenuState{
                 switch (selection) {
                     case 1 -> {
                         ShopDB db = ShopDB.getDB();
-                        db.addProduct(user, name, category, description, price, stock);
-                        System.out.println(db.getActiveProducts().toArray().toString());
-                        System.out.println("--------------Product Created!--------------\n");
+                        db.editProduct(this.product, name, category, description, price, stock);
+                        System.out.println("--------------Product Edited!--------------\n");
                         context.setMenuState(new ProductManagementMenu());
                     }
                     case 2 -> {
-                        context.setMenuState(new ProductManagementMenu());
+                        context.setMenuState(new UserProductPickerMenu());
                     }
                     
                     default -> loop = true;
@@ -52,5 +53,9 @@ class CreateProductMenu implements MenuState{
             }
                 
         } while (loop);
+    }
+
+    public EditProductMenu(Product product){
+        this.product = product;
     }
 }

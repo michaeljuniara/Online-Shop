@@ -5,7 +5,7 @@ class CategoryPicker{
     
     public void chooseCategory(AppContext context){
         ShopDB db = ShopDB.getDB();
-        String menuTemplate = "Berikut adalah semua kategori untuk dipilih:\n(i).\t(kategori)";
+        String menuTemplate = "Berikut adalah semua kategori untuk dipilih:\n(i).\t(kategori)\n";
         //list the categories to choose
         List<Category> categories = db.getCategories();
         int index = 1;
@@ -14,6 +14,8 @@ class CategoryPicker{
             index++;
         }
         menuTemplate += "Pilih kategori berdasarkan index:\n";
+        System.out.println(menuTemplate);
+
 
         boolean loop = false;
         do { 

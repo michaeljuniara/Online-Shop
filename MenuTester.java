@@ -13,7 +13,7 @@ public class MenuTester {
         electronics.add(laptops);
         electronics.add(gaming);
         
-
+        db.addCategory(electronics);
         
 
         AppContext context = new AppContext(sc);

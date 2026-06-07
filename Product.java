@@ -16,6 +16,7 @@ public class Product implements CategoryComponent {
         this.description = description;
         this.price = price;
         this.stock = stock;
+        this.active = true;//change
     }
 
     public void getProducts(List<Product> list) { list.add(this); }

@@ -17,10 +17,10 @@ class ProductManagementMenu implements MenuState{
                         context.setMenuState(new CreateProductMenu());
                     }
                     case 2 -> {
-                        context.setMenuState(new MerchantMainMenu());
+                        context.setMenuState(new RemoveProductMenu());
                     }
                     case 3 -> {
-                        context.setMenuState(new MerchantMainMenu());
+                        context.setMenuState(new UserProductPickerMenu());
                     }
                     case 4 -> {
                         context.setMenuState(new MerchantMainMenu());
