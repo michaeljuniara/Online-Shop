@@ -78,7 +78,7 @@ public class User implements OrderObserver {
     public String getPassword() { return password; } 
     public Cart getCart() { return shoppingCart; }
     public List<Product> getProducts() { return Collections.unmodifiableList(products); }
-    public List<Transaction> getBuyTransactionHistory() { return Collections.unmodifiableList(buyTransactions); }
+    public List<Transaction> getBuyTransactions() { return Collections.unmodifiableList(buyTransactions); }
     public List<Notification> getNotifications() { return Collections.unmodifiableList(notifications); }
     public List<Order> getSellOrders() { return Collections.unmodifiableList(sellOrders); }
 }
