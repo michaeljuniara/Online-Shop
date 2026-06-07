@@ -1,5 +1,4 @@
-import javax.management.Notification;
-
+import java.util.*;
 class NotificationsMenu implements MenuState{
     @Override
     public void execute(AppContext context){
@@ -13,8 +12,9 @@ class NotificationsMenu implements MenuState{
         }
         menuTemplate += "Enter 0 to go back to main menu.";
         System.out.println(menuTemplate);
-        boolean exit = false;
+        boolean loop = false;
             do {
+                loop = false;
                 System.out.println(menuTemplate);
                 try {
                     int selection = context.sc.nextInt();
@@ -23,12 +23,12 @@ class NotificationsMenu implements MenuState{
                             context.setMenuState(new BuyerMainMenu());
                         }
 
-                        default -> exit = true;
+                        default -> loop = true;
                     }
                 } catch (Exception e) {
                     System.out.println(e);
                 }
 
-            } while (!exit);
+            } while (loop);
     }
 }

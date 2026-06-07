@@ -8,11 +8,12 @@ class SellTransactionMenuAtDate implements MenuState{
             String menuTemplate = "List transaksi pada tanggal "+chosenDate;
             int index = 1;
             for (Transaction transaction : transactions) {
-                menuTemplate += index+".\t"+transaction.getInfo();
+                menuTemplate += index+".\t"+transaction.getBuyer() + " "+ transaction.getPrice();
                 index++;
             }
-            boolean exit = false;
+            boolean loop = false;
             do {
+                loop = false;
                 System.out.println(menuTemplate);
                 
                 try {
@@ -21,13 +22,13 @@ class SellTransactionMenuAtDate implements MenuState{
                     case 1 -> {
                         context.setMenuState(new SellTransactionMenu());
                     }
-                    default -> exit = true;
+                    default -> loop = true;
                     }
                 } catch (Exception e) {
                     System.out.println(e);
                 }
                 
-            } while (exit);
+            } while (loop);
     }
 
     public SellTransactionMenuAtDate(List<Transaction> transactions, LocalDate chosenDate) {

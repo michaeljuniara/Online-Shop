@@ -21,19 +21,21 @@ class CreateProductMenu implements MenuState{
         System.out.println("Stok tersedia?");
         int stock = context.sc.nextInt();
 
-        //pilihannya adalah untuk buat produk atau kembali ke product management menu
+        //pilihannya adalah untuk buat produk atau kembali ke product management menu (Cancel)
         String menuTemplate = """
                     1.  Create
                     2.  Cancel
                 """;
-        boolean exit = false;
+        boolean loop = false;
         do {
+            loop = false;
             System.out.println(menuTemplate);
             try {
                 int selection = context.sc.nextInt();
                 switch (selection) {
                     case 1 -> {
-                        user.newProduct(name, category, description, price, stock);
+                        ShopDB db = ShopDB.getDB();
+                        db.addProduct(user, name, category, description, price, stock);
                         System.out.println("--------------Product Created!--------------");
                         context.setMenuState(new ProductManagementMenu());
                     }
@@ -41,12 +43,12 @@ class CreateProductMenu implements MenuState{
                         context.setMenuState(new ProductManagementMenu());
                     }
                     
-                    default -> exit = true;
+                    default -> loop = true;
                 }
             } catch (Exception e) {
                 System.out.println(e);
             }
                 
-        } while (exit);
+        } while (loop);
     }
 }

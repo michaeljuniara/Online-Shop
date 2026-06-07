@@ -9,8 +9,9 @@ public class BuyerMainMenu implements MenuState{
                 5.  Lihat Notifikasi
                 6.  Keluar Aplikasi
                 """;
-        boolean exit = false;
+        boolean loop = false;
             do {
+                loop = false;
                 System.out.println(menuTemplate);
                 try {
                     int selection = context.sc.nextInt();
@@ -33,14 +34,14 @@ public class BuyerMainMenu implements MenuState{
                         case 6 -> {
                             System.out.println("program exited");
                         }
-                        default -> exit = true;
+                        default -> loop = true;
                     }
                 } catch (Exception e) {
                     System.out.println(e);
                 }
                 
                 
-            } while (exit);
+            } while (loop);
 
     }
 }

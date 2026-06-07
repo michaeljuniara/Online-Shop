@@ -26,11 +26,13 @@ class LoginMenu implements MenuState{
                 """;
             
             
-            boolean exit = false;
+            boolean loop = false;
             do {
+                loop = false;
                 System.out.println(userTypeMenuTemplate);
                 
                 try {
+                    
                     int selection = context.sc.nextInt();
                     switch (selection) {
                     case 1 -> {
@@ -39,13 +41,13 @@ class LoginMenu implements MenuState{
                     case 2 -> {
                         context.setMenuState(new MerchantMainMenu());
                     }
-                    default -> exit = true;
+                    default -> loop = true;
                     }
                 } catch (Exception e) {
                     System.out.println(e);
                 }
                 
-            } while (exit);
+            } while (loop);
 
         }else{
             System.out.println("LOGIN FAILED!");
@@ -55,9 +57,10 @@ class LoginMenu implements MenuState{
                 1.  Kembali ke menu Login.
                 2.  Keluar Aplikasi.
                 """;
-            boolean exit = false;
+            boolean loop = false;
 
             do {
+                loop = false;
                 System.out.println(failedMenuTemplate);
                 int selection = context.sc.nextInt();
                 try {
@@ -68,13 +71,13 @@ class LoginMenu implements MenuState{
                     case 2 -> {
                         System.out.println("program exited");
                     }
-                    default -> exit = true;
+                    default -> loop = true;
                     }
                 } catch (Exception e) {
                     System.out.println(e);
                 }
                 
-            } while (exit);
+            } while (loop);
             
             //get change menuState back to LoginMenu
         }

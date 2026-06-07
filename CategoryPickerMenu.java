@@ -14,12 +14,19 @@ class CategoryPicker{
             index++;
         }
         menuTemplate += "Pilih kategori berdasarkan index:\n";
-        int chosenIndex = context.sc.nextInt() - 1;
-        //kalau index di luar yang ada...
-        this.chosenCategory = categories.get(chosenIndex);
 
+        boolean loop = false;
+        do { 
+            loop = false;
+            try {
+                int chosenIndex = context.sc.nextInt() - 1;
+                this.chosenCategory = categories.get(chosenIndex);
+            } catch (Exception e) {
+                System.out.println(e);
+                loop = true;
+            }
 
-
+        } while (loop);
     }
 
     public Category getChosenCategory(){

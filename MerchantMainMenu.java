@@ -6,8 +6,9 @@ class MerchantMainMenu implements MenuState{
                 2.  Lihat History Transaksi
                 3.  Keluar Aplikasi
                 """;
-        boolean exit = false;
+        boolean loop = false;
         do {
+            loop = false;
             System.out.println(menuTemplate);
             try {
                 int selection = context.sc.nextInt();
@@ -22,12 +23,12 @@ class MerchantMainMenu implements MenuState{
                         System.out.println("program exited");
                     }
                     
-                    default -> exit = true;
+                    default -> loop = true;
                 }
             } catch (Exception e) {
                 System.out.println(e);
             }
                 
-        } while (exit);
+        } while (loop);
     }
 }

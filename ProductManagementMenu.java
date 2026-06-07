@@ -1,13 +1,14 @@
 class ProductManagementMenu implements MenuState{
     public void execute(AppContext context){
         String menuTemplate = """
-                    1.  Add
-                    2.  Remove
-                    3.  Edit
-                    4.  Kembali
+                1.  Add
+                2.  Remove
+                3.  Edit
+                4.  Kembali
                 """;
-        boolean exit = false;
+        boolean loop = false;
         do {
+            loop = false;
             System.out.println(menuTemplate);
             try {
                 int selection = context.sc.nextInt();
@@ -25,13 +26,13 @@ class ProductManagementMenu implements MenuState{
                         context.setMenuState(new MerchantMainMenu());
                     }
                     
-                    default -> exit = true;
+                    default -> loop = true;
                 }
             } catch (Exception e) {
                 System.out.println(e);
             }
                 
-        } while (!exit);
+        } while (loop);
     }
 }
 

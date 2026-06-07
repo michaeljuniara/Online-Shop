@@ -6,7 +6,19 @@ class SellTransactionMenu implements MenuState{
     @Override
     public void execute(AppContext context){
         User user = context.getUser();
-        List<Transaction> transactions = user.getSellTransactions();
+        List<Order> orders = user.getSellOrders();
+        
+        List<Transaction> transactions = new LinkedList<>();
+        
+        for (Order order : orders) {
+            Transaction orderTransaction = order.getParentTransaction();
+            if (!transactions.contains(orderTransaction)){
+                transactions.add(orderTransaction);
+            }
+        }
+
+
+
         String menuTemplate = """
                     List Riwayat Transaksi
                     (i). Tanggal Belanja
@@ -56,8 +68,9 @@ class SellTransactionMenu implements MenuState{
                 """;
         System.out.println(menuTemplate);
 
-        boolean exit = false;
+        boolean loop = false;
         do {
+            loop = false;
             System.out.println(menuTemplate);
             try {
                 int selection = context.sc.nextInt();
@@ -68,12 +81,12 @@ class SellTransactionMenu implements MenuState{
                     case 2 -> {
                         context.setMenuState(new MerchantMainMenu());
                     }
-                    default -> exit = true;
+                    default -> loop = true;
                 }
             } catch (Exception e) {
                 System.out.println(e);
             }
                 
-        } while (exit);
+        } while (loop);
     }
 }
