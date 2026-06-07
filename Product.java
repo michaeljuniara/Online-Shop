@@ -54,6 +54,15 @@ public class Product implements CategoryComponent {
         stock += amount;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+
+        Product other = (Product) obj;
+        return this.name.equals(other.name) && this.category.equals(other.category) && this.owner.equals(other.owner);
+    }
+
     public boolean isActive() { return active; }
     public String getName() { return name; }
     public String getDescription() { return description; }

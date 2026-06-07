@@ -13,6 +13,14 @@ public class Category implements CategoryComponent {
         subcategories.add(cc);
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+
+        Category other = (Category) obj;
+        return name.equals(other.name);
+    }
     public void remove(CategoryComponent cc) {
         subcategories.remove(cc);
     }
