@@ -61,27 +61,10 @@ public class Product implements CategoryComponent {
         stock += amount;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public int getStock() {
-        return stock;
-    }
-
-    public Category getCategory() {
-        return category;
-    }
-
-    public User getOwner() {
-        return owner;
-    }
+    public String getName() { return name; }
+    public String getDescription() { return description; }
+    public double getPrice() { return price; }
+    public int getStock() { return stock; }
+    public Category getCategory() { return category; }
+    public User getOwner() { return owner; }
 }

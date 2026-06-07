@@ -9,15 +9,6 @@ public class Category implements CategoryComponent {
         this.name = name;
     }
 
-    public void getProducts(List<Product> list) {
-        for (CategoryComponent child : subcategories) 
-            child.getProducts(list);
-    }
-
-    public String getName() {
-        return name;
-    }
-
     public void add(CategoryComponent cc) {
         subcategories.add(cc);
     }
@@ -25,4 +16,10 @@ public class Category implements CategoryComponent {
     public void remove(CategoryComponent cc) {
         subcategories.remove(cc);
     }
+
+    public void getProducts(List<Product> list) {
+        for (CategoryComponent child : subcategories) 
+            child.getProducts(list);
+    }
+    public String getName() { return name; }
 }

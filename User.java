@@ -2,66 +2,36 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class User {
+public class User implements OrderObserver {
     private String username;
     private String password;
     private List<Product> products;
-    private List<Order> orderHistory;
-    private List<Transaction> buyTransactions;
-    private List<Transaction> sellTransactions;
-    private List<Order> managedOrders;
-    // private List<Notification> notifications;
     private Cart shoppingCart;
+
+    // buyer & seller
+    private List<Transaction> buyTransactions;  // apa yang aku beli
+    private List<Notification> buyNotifications;
+    private List<Order> sellOrders;             // apa yang harus aku kirim
 
     public User(String username, String password) {
         this.username = username;
         this.password = password;
 
         products = new ArrayList<>();
-        orderHistory = new ArrayList<>();
-        buyTransactions = new ArrayList<>();
-        sellTransactions = new ArrayList<>();
-        managedOrders = new ArrayList<>();
-        // notifications = new ArrayList<>();
         shoppingCart = new Cart(new ArrayList<>());
+
+        buyTransactions = new ArrayList<>();
+        sellOrders = new ArrayList<>();
     }
     
     public void deactivateProduct(int i) {
         products.get(i).deactivate();
     }
 
-    public String getUsername() {
-        return username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public List<Transaction> getBuyTransactionHistory() {
-        return buyTransactions;
-    }
-    
-    public List<Order> getOrderHistory() {
-        return orderHistory;
-    }
-
-    // public List<Notification> getLiNotifications() {
-    //     return notifications;
-    // }
-
-    public Cart getCart() {
-        return shoppingCart;
-    }
-
     public void newProduct(Product product) {
         Product p = product;
         products.add(p);
         ShopDB.getDB().addProduct(p);
-    }
-
-    public List<Product> getProducts() {
-        return Collections.unmodifiableList(products);
     }
 
     public void editProduct(int i, String name, Category category, String description, double price, int stock) {
@@ -74,4 +44,43 @@ public class User {
             p.setStock(stock);
         }
     }
+
+    public void addBuyTransaction(Transaction transaction) {
+        buyTransactions.add(transaction);
+    }
+
+    public void addSellOrder(Order order) {
+        sellOrders.add(order);
+    }
+
+    public void addNotification(Notification notification) {
+        this.buyNotifications.add(notification);
+    }
+
+    public boolean equals(User other) {
+        return username.equals(other.username) && password.equals(other.password);
+    }
+
+    @Override
+    public void onStatusChanged(Order order, Order.Status newStatus) {
+        if (order.getBuyer().equals(this)) {
+            if (newStatus == Order.Status.PACKING) {
+                buyNotifications.add(new Notification("Order " + order.getItem().getProduct().getName() + "-mu sedang diproses!"));
+            }
+            else if (newStatus == Order.Status.DELIVERING) {
+                buyNotifications.add(new Notification("Order " + order.getItem().getProduct().getName() + "-mu sedang dalam pengiriman!"));
+            }
+            else if (newStatus == Order.Status.ARRIVED) {
+                buyNotifications.add(new Notification("Order " + order.getItem().getProduct().getName() + "-mu sudah sampai!"));
+            }
+        }   
+    }
+
+    public String getUsername() { return username; }
+    public String getPassword() { return password; } 
+    public Cart getCart() { return shoppingCart; }
+    public List<Product> getProducts() { return Collections.unmodifiableList(products); }
+    public List<Transaction> getBuyTransactionHistory() { return Collections.unmodifiableList(buyTransactions); }
+    public List<Notification> getBuyNotifications() { return Collections.unmodifiableList(buyNotifications); }
+    public List<Order> getSellOrders() { return Collections.unmodifiableList(sellOrders); }
 }

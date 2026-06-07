@@ -50,6 +50,22 @@ public class Test {
         System.out.println("====================");
     }
 
+    public static void OrderObserverTest() {
+        User buyer = new User("Ian", "Ian123");
+
+        Category electronics = new Category("Electronics");
+        Category laptops = new Category("Laptops");
+        Product macbook = new Product(buyer, "Macbook Neo", laptops, "Apple A18 Pro Chip", 15_000_000.00, 10);
+
+        electronics.add(laptops);
+        laptops.add(macbook);
+
+        CartItem item = new CartItem(macbook, 1);
+        Order order = new Order(item, buyer);
+
+        
+    }
+
     public static void main(String[] args) {
         categoryComponentTest();
     }

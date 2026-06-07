@@ -46,11 +46,6 @@ public class ShopDB {
         vouchers.put(v.getCode(), v);
     }
 
-    public List<Category> getCategories() {
-        return Collections.unmodifiableList(categories);
-    }
-
-    public Voucher getVoucher(String code) {
-        return vouchers.get(code);
-    }
+    public List<Category> getCategories() { return Collections.unmodifiableList(categories); }
+    public Voucher getVoucher(String code) { return vouchers.get(code); }
 }
