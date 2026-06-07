@@ -1,10 +1,10 @@
-class MerchantMainMenu implements MenuState{
-    @Override
+class ProductManagementMenu {
     public void execute(AppContext context){
         String menuTemplate = """
-                    1.  Kelola Produk
-                    2.  Lihat History Transaksi
-                    3.  Keluar Aplikasi
+                    1.  Add
+                    2.  Remove
+                    3.  Edit
+                    4.  Kembali
                 """;
         boolean exit = false;
         do {
@@ -16,10 +16,13 @@ class MerchantMainMenu implements MenuState{
                         context.setMenuState(new BuyerMainMenu());
                     }
                     case 2 -> {
-                        context.setMenuState(new SellTransactionMenu());
+                        context.setMenuState(new MerchantMainMenu());
                     }
                     case 3 -> {
-                        System.out.println("program exited");
+                        context.setMenuState(new MerchantMainMenu());
+                    }
+                    case 4 -> {
+                        context.setMenuState(new MerchantMainMenu());
                     }
                     
                     default -> exit = true;
@@ -31,3 +34,4 @@ class MerchantMainMenu implements MenuState{
         } while (!exit);
     }
 }
+
