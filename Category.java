@@ -3,21 +3,26 @@ import java.util.ArrayList;
 
 public class Category implements CategoryComponent {
     private String name;
-    private List<CategoryComponent> subcategories;
+    private List<CategoryComponent> subcategories = new ArrayList<>();
 
-    public void getProducts(List<Products> list) {
-        for (Category child : subcategories) child.getProducts(list);
+    public Category(String name) {
+        this.name = name;
+    }
+
+    public void getProducts(List<Product> list) {
+        for (CategoryComponent child : subcategories) 
+            child.getProducts(list);
     }
 
     public String getName() {
         return name;
     }
 
-    public void addProduct(Product p) {
-        subcategories.add(p);
+    public void add(CategoryComponent cc) {
+        subcategories.add(cc);
     }
 
-    public void removeProduct(Product p) {
-        subcategories.remove(p);
+    public void remove(CategoryComponent cc) {
+        subcategories.remove(cc);
     }
 }

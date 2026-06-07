@@ -10,7 +10,7 @@ public class User {
     private List<Transaction> buyTransactions;
     private List<Transaction> sellTransactions;
     private List<Order> managedOrders;
-    private List<Notification> notifications;
+    // private List<Notification> notifications;
     private Cart shoppingCart;
 
     public User(String username, String password) {
@@ -22,7 +22,8 @@ public class User {
         buyTransactions = new ArrayList<>();
         sellTransactions = new ArrayList<>();
         managedOrders = new ArrayList<>();
-        notifications = new ArrayList<>();
+        // notifications = new ArrayList<>();
+        shoppingCart = new Cart(new ArrayList<>());
     }
     
     public void deactivateProduct(int i) {
@@ -37,26 +38,26 @@ public class User {
         return password;
     }
 
-    public List<Transaction> getTransactionHistory() {
-        return transactionHistory;
+    public List<Transaction> getBuyTransactionHistory() {
+        return buyTransactions;
     }
     
     public List<Order> getOrderHistory() {
         return orderHistory;
     }
 
-    public List<Notification> getLiNotifications() {
-        return notifications;
-    }
+    // public List<Notification> getLiNotifications() {
+    //     return notifications;
+    // }
 
     public Cart getCart() {
         return shoppingCart;
     }
 
-    public void newProduct(String name, Category category, String description, double price, int stock) {
-        Product p = new Product(name, category, description, price, stock);
+    public void newProduct(Product product) {
+        Product p = product;
         products.add(p);
-        ShopDB.addProduct(p);
+        ShopDB.getDB().addProduct(p);
     }
 
     public List<Product> getProducts() {
