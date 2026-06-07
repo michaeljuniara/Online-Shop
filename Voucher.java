@@ -8,15 +8,7 @@ public class Voucher {
         this.nominal = nominal;
         remainingUsage = maxUsage;
     }
-
-    public String getCode() {
-        return this.code;
-    }
-
-    public boolean isValid() {
-        return remainingUsage > 0;
-    }
-
+        
     public double use() {
         if (isValid()) {
             --remainingUsage;
@@ -24,4 +16,7 @@ public class Voucher {
         }
         else return 0.0;
     }
+    
+    public String getCode() { return this.code; }
+    public boolean isValid() { return remainingUsage > 0; }
 }

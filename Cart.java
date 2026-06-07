@@ -1,20 +1,19 @@
+import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
-import java.time.LocalDate;
 
 public class Cart {
     private List<CartItem> items;
     private Voucher voucher;
 
-    public Cart(List<CartItem> items) {
-        this.items = items;
-    }
-
-    public List<CartItem> getItems() {
-        return this.items;
+    public Cart() {
+        this.items = new ArrayList<>();
     }
     
-    public void addItem(CartItem item) {
-        this.items.add(item);
+    public void addItem(Product product, int quantity) {
+        CartItem ci = new CartItem(product, quantity);
+
+        items.add(ci);
     }
 
     public boolean removeItem(int itemNumber) {
@@ -24,15 +23,17 @@ public class Cart {
         return true;
     }
 
-    public Voucher getVoucher() {
-        return this.voucher;
+    public boolean setVoucher(String code) {
+        Voucher v = ShopDB.getDB().getVoucher(code);
+
+        if (v != null) {
+            this.voucher = v;
+            
+            return true;
+        } else return false;
     }
 
-    public void setVoucher(Voucher voucher) {
-        this.voucher = voucher;
-    }
-
-    public void clearItems() {
+    public void clearCart() {
         this.items.clear();
     }
 
@@ -46,13 +47,6 @@ public class Cart {
         return total;
     }
 
-    public Transaction buy(User recipient) {
-        Transaction t = new Transaction(LocalDate.now(), recipient, Transaction.Type.BUY);
-    
-        for (CartItem cartItem : items) {
-            t.addOrder(new Order(cartItem));
-        }
-
-        return t;
-    }
+    public List<CartItem> getItems() { return Collections.unmodifiableList(this.items); }
+    public Voucher getVoucher() { return voucher; }
 }
