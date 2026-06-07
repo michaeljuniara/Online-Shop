@@ -56,10 +56,6 @@ public class ShopDB {
         return true;
     }
 
-    public void addProduct(Product p) {
-        products.add(p);
-    }
-
     public void addVoucher(Voucher v) {
         vouchers.put(v.getCode(), v);
     }
