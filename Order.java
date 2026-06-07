@@ -19,7 +19,7 @@ public class Order {
     public void setStatus(Status newStatus) {
         orderStatus = newStatus;
         
-        if (orderStatus == Status.SENT) notifyObserver();
+        if (orderStatus == Status.SENT) notifyUser();
     }
 
     public Status getOrderStatus() {
@@ -38,5 +38,5 @@ public class Order {
         return seller;
     }
 
-    private void notifyObserver() { return; }
+    private void notifyUser() { return; }
 }
