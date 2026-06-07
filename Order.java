@@ -27,7 +27,7 @@ public class Order {
         return item;
     }
 
-    public void notify() {
-        buyer.update(orderStatus.name(), item);
-    }
+    // public void notify() {
+    //     buyer.update(orderStatus.name(), item);
+    // }
 }

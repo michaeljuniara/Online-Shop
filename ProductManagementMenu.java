@@ -1,4 +1,4 @@
-class ProductManagementMenu {
+class ProductManagementMenu implements MenuState{
     public void execute(AppContext context){
         String menuTemplate = """
                     1.  Add
@@ -13,7 +13,7 @@ class ProductManagementMenu {
                 int selection = context.sc.nextInt();
                 switch (selection) {
                     case 1 -> {
-                        context.setMenuState(new BuyerMainMenu());
+                        context.setMenuState(new CreateProductMenu());
                     }
                     case 2 -> {
                         context.setMenuState(new MerchantMainMenu());

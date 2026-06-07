@@ -27,8 +27,9 @@ class AppContext {
 
 
     //appContext selalu dimulai dengan loginmenu
-    AppContext(Scanner sc){
+    public AppContext(Scanner sc){
         this.currentState = new LoginMenu();
+        this.sc = sc;
     }
 
 }

@@ -10,7 +10,7 @@ public class User {
     private List<Transaction> buyTransactions;
     private List<Transaction> sellTransactions;
     private List<Order> managedOrders;
-    private List<Notification> notifications;
+    //private List<Notification> notifications;
     private Cart shoppingCart;
 
     public User(String username, String password) {
@@ -22,7 +22,7 @@ public class User {
         buyTransactions = new ArrayList<>();
         sellTransactions = new ArrayList<>();
         managedOrders = new ArrayList<>();
-        notifications = new ArrayList<>();
+        //notifications = new ArrayList<>();
     }
     
     public void deactivateProduct(int i) {
@@ -37,17 +37,17 @@ public class User {
         return password;
     }
 
-    public List<Transaction> getTransactionHistory() {
-        return transactionHistory;
-    }
+    // public List<Transaction> getTransactionHistory() {
+    //     return transactionHistory;
+    // }
     
     public List<Order> getOrderHistory() {
         return orderHistory;
     }
 
-    public List<Notification> getLiNotifications() {
-        return notifications;
-    }
+    // public List<Notification> getLiNotifications() {
+    //     return notifications;
+    // }
 
     public Cart getCart() {
         return shoppingCart;

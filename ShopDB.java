@@ -1,8 +1,8 @@
-import java.util.List;
 import java.util.ArrayList;
-import java.util.Map;
-import java.util.HashMap;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class ShopDB {
     private static ShopDB instance = new ShopDB();
@@ -10,24 +10,24 @@ public class ShopDB {
     private List<Product> products;
     private List<Category> categories;
     private Map<String, Voucher> vouchers;
-    private List<PaymentStrategy> paymentMethods;
+    //private List<PaymentStrategy> paymentMethods;
     
     private ShopDB() {
         users = new ArrayList<>();
         products = new ArrayList<>();
         categories = new ArrayList<>();
         vouchers = new HashMap<>();
-        paymentMethods = new ArrayList<>();
+        //paymentMethods = new ArrayList<>();
     }
 
-    public ShopDB getDB() {
+    public static ShopDB getDB() {
         return instance;
     }
 
     public User loginUser(String username, String password) {
         for (User u : users) {
             if (u.getUsername().equals(username) &&
-            u.getUsername().equals(password)) return u;
+            u.getPassword().equals(password)) return u;
         }
         return null;
     }
@@ -48,9 +48,9 @@ public class ShopDB {
         vouchers.put(v.getCode(), v);
     }
 
-    public void addPaymentMethod(PaymentStrategy ps) {
-        paymentMethods.add(ps);
-    }
+    // public void addPaymentMethod(PaymentStrategy ps) {
+    //     paymentMethods.add(ps);
+    // }
 
     public List<Category> getCategories() {
         return Collections.unmodifiableList(categories);
@@ -60,7 +60,7 @@ public class ShopDB {
         return vouchers.get(code);
     }
 
-    public List<PaymentStrategy> getPaymentMethods() {
-        return Collections.unmodifiableList(paymentMethods);
-    }
+    // public List<PaymentStrategy> getPaymentMethods() {
+    //     return Collections.unmodifiableList(paymentMethods);
+    // }
 }

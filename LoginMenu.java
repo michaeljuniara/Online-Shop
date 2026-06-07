@@ -4,15 +4,13 @@ class LoginMenu implements MenuState{
     public void execute(AppContext context){
         String menuTemplate = """
                 --------LOGIN----------
-                Username    :
-                Password    :
-                """;
-        System.out.println(menuTemplate);
+                Username    :""";
+        System.out.print(menuTemplate);
 
         String inUsername = context.sc.next();
+        System.out.print("Password    :");
         String inPassword= context.sc.next();
-
-        Database DBInstance = Database.getDB();
+        ShopDB DBInstance = ShopDB.getDB();
         boolean loginSuccessful = context.setUser(DBInstance.loginUser(inUsername, inPassword));
 
         //Kalau ditemukan User dengan username dan password yang sesuai
@@ -44,9 +42,10 @@ class LoginMenu implements MenuState{
                     default -> exit = true;
                     }
                 } catch (Exception e) {
+                    System.out.println(e);
                 }
                 
-            } while (!exit);
+            } while (exit);
 
         }else{
             System.out.println("LOGIN FAILED!");
@@ -75,7 +74,7 @@ class LoginMenu implements MenuState{
                     System.out.println(e);
                 }
                 
-            } while (!exit);
+            } while (exit);
             
             //get change menuState back to LoginMenu
         }

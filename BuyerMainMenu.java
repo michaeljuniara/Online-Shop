@@ -2,14 +2,13 @@ public class BuyerMainMenu implements MenuState{
     @Override
     public void execute(AppContext context){
         String menuTemplate = """
-                    1.  Cari Produk
-                    2.  Lihat Keranjang
-                    3.  Lihat History Transaksi
-                    4.  Lihat History Pemesanan
-                    5.  Lihat Notifikasi
-                    6.  Keluar Aplikasi
+                1.  Cari Produk
+                2.  Lihat Keranjang
+                3.  Lihat History Transaksi
+                4.  Lihat History Pemesanan
+                5.  Lihat Notifikasi
+                6.  Keluar Aplikasi
                 """;
-        System.out.println(menuTemplate);
         boolean exit = false;
             do {
                 System.out.println(menuTemplate);
@@ -41,7 +40,7 @@ public class BuyerMainMenu implements MenuState{
                 }
                 
                 
-            } while (!exit);
+            } while (exit);
 
     }
 }
