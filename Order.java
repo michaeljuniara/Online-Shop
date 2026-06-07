@@ -9,8 +9,8 @@ public class Order implements OrderSubject {
     public Order(CartItem item, User buyer) {
         this.item = item;
         this.seller = item.getProduct().getOwner();
-        setStatus(Status.PACKING);
         setObserver(buyer);
+        setStatus(Status.PACKING);
     }
     
     public void setStatus(Status newStatus) {
