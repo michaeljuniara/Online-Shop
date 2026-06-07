@@ -40,18 +40,18 @@ public class ShopDB {
 
     public User loginUser(String username, String password) {
         for (User u : users) {
-            if (u.getUsername().equals(username) &&
-            u.getUsername().equals(password)) return u;
+            if (u.getUsername().equals(username) && u.getPassword().equals(password)) return u;
         }
         return null;
     }
 
     public boolean registerUser(String username, String password) {
+        User user = new User(username, password);
+
         for (User u : users){
-            if (u.getUsername().equals(username)) return false;
+            if (u.equals(user)) return false;
         }
 
-        User user = new User(username, password);
         users.add(user);
         return true;
     }

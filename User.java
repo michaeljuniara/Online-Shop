@@ -36,7 +36,7 @@ public class User implements OrderObserver {
     }
 
     public boolean equals(User other) {
-        return username.equals(other.username) && password.equals(other.password);
+        return username.equals(other.username);
     }
 
     @Override
