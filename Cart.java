@@ -23,8 +23,14 @@ public class Cart {
         return true;
     }
 
-    public void setVoucher(Voucher voucher) {
-        this.voucher = voucher;
+    public boolean setVoucher(String code) {
+        Voucher v = ShopDB.getDB().getVoucher(code);
+
+        if (v != null) {
+            this.voucher = v;
+            
+            return true;
+        } else return false;
     }
 
     public void clearCart() {
