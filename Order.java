@@ -16,7 +16,7 @@ public class Order {
     public void setStatus(Status newStatus) {
         orderStatus = newStatus;
         
-        if (orderStatus == Status.SENT) notify();;
+        if (orderStatus == Status.SENT) notifyObserver();
     }
 
     public Status getOrderStatus() {
@@ -27,7 +27,5 @@ public class Order {
         return item;
     }
 
-    public void notify() {
-        buyer.update(orderStatus.name(), item);
-    }
+    public void notifyObserver() { return; }
 }

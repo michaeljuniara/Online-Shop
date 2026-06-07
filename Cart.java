@@ -1,9 +1,7 @@
 import java.util.List;
-import java.time.LocalDate;
 
 public class Cart {
     private List<CartItem> items;
-    private Voucher voucher;
 
     public Cart(List<CartItem> items) {
         this.items = items;
@@ -24,14 +22,6 @@ public class Cart {
         return true;
     }
 
-    public Voucher getVoucher() {
-        return this.voucher;
-    }
-
-    public void setVoucher(Voucher voucher) {
-        this.voucher = voucher;
-    }
-
     public void clearItems() {
         this.items.clear();
     }
@@ -44,15 +34,5 @@ public class Cart {
         }
 
         return total;
-    }
-
-    public Transaction buy(User recipient) {
-        Transaction t = new Transaction(LocalDate.now(), recipient, Transaction.Type.BUY);
-    
-        for (CartItem cartItem : items) {
-            t.addOrder(new Order(cartItem));
-        }
-
-        return t;
     }
 }
