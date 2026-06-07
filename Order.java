@@ -10,7 +10,8 @@ public class Order {
         this.item = item;
         this.buyer = buyer;
         this.seller = item.getProduct().getOwner();
-        orderStatus = Status.PACKING;
+        observer = buyer;
+        setStatus(Status.PACKING);
     }
     
     public void setStatus(Status newStatus) {

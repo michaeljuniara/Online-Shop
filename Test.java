@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Locale;
 
 public class Test {
+    // test categoryComponent
     public static void categoryComponentTest() {
         User seller = new User("Ian", "Ian123");
 
@@ -50,7 +51,8 @@ public class Test {
         System.out.println("====================");
     }
 
-    public static void OrderObserverTest() {
+    // test orderObserver
+    public static void orderObserverTest() {
         User buyer = new User("Ian", "Ian123");
 
         Category electronics = new Category("Electronics");
@@ -63,10 +65,26 @@ public class Test {
         CartItem item = new CartItem(macbook, 1);
         Order order = new Order(item, buyer);
 
-        
+        System.out.println("=== SIMULASI E-COMMERCE (SINGLE OBSERVER) ===");
+        System.out.println("Buyer  : " + buyer.getUsername());
+        System.out.println("Barang : " + order.getItem().getProduct().getName());
+        System.out.println("----------------------------------------------\n");
+
+        System.out.println("[Sistem] Penjual menyerahkan barang ke kurir...");
+        order.setStatus(Order.Status.DELIVERING);
+
+        System.out.println("[Kurir] Kurir sampai di depan rumah...");
+        order.setStatus(Order.Status.ARRIVED);
+
+        List<Notification> userNotif = buyer.getNotifications();
+
+        for (Notification n : userNotif) {
+            System.out.println(n.getMessage());
+            n.markAsRead();
+        }
     }
 
     public static void main(String[] args) {
-        categoryComponentTest();
+        orderObserverTest();
     }
 }

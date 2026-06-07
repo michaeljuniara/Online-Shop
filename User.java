@@ -10,8 +10,8 @@ public class User implements OrderObserver {
 
     // buyer & seller
     private List<Transaction> buyTransactions;  // apa yang aku beli
-    private List<Notification> buyNotifications;
     private List<Order> sellOrders;             // apa yang harus aku kirim
+    private List<Notification> notifications;
 
     public User(String username, String password) {
         this.username = username;
@@ -22,6 +22,7 @@ public class User implements OrderObserver {
 
         buyTransactions = new ArrayList<>();
         sellOrders = new ArrayList<>();
+        notifications = new ArrayList<>();
     }
     
     public void deactivateProduct(int i) {
@@ -29,9 +30,8 @@ public class User implements OrderObserver {
     }
 
     public void newProduct(Product product) {
-        Product p = product;
-        products.add(p);
-        ShopDB.getDB().addProduct(p);
+        products.add(product);
+        ShopDB.getDB().addProduct(product);
     }
 
     public void editProduct(int i, String name, Category category, String description, double price, int stock) {
@@ -54,7 +54,7 @@ public class User implements OrderObserver {
     }
 
     public void addNotification(Notification notification) {
-        this.buyNotifications.add(notification);
+        this.notifications.add(notification);
     }
 
     public boolean equals(User other) {
@@ -63,17 +63,15 @@ public class User implements OrderObserver {
 
     @Override
     public void onStatusChanged(Order order, Order.Status newStatus) {
-        if (order.getBuyer().equals(this)) {
-            if (newStatus == Order.Status.PACKING) {
-                buyNotifications.add(new Notification("Order " + order.getItem().getProduct().getName() + "-mu sedang diproses!"));
-            }
-            else if (newStatus == Order.Status.DELIVERING) {
-                buyNotifications.add(new Notification("Order " + order.getItem().getProduct().getName() + "-mu sedang dalam pengiriman!"));
-            }
-            else if (newStatus == Order.Status.ARRIVED) {
-                buyNotifications.add(new Notification("Order " + order.getItem().getProduct().getName() + "-mu sudah sampai!"));
-            }
-        }   
+        if (newStatus == Order.Status.PACKING) {
+            addNotification(new Notification("Order " + order.getItem().getProduct().getName() + "-mu sedang diproses!"));
+        }
+        else if (newStatus == Order.Status.DELIVERING) {
+            addNotification(new Notification("Order " + order.getItem().getProduct().getName() + "-mu sedang dalam pengiriman!"));
+        }
+        else if (newStatus == Order.Status.ARRIVED) {
+            addNotification(new Notification("Order " + order.getItem().getProduct().getName() + "-mu sudah sampai!"));
+        }
     }
 
     public String getUsername() { return username; }
@@ -81,6 +79,6 @@ public class User implements OrderObserver {
     public Cart getCart() { return shoppingCart; }
     public List<Product> getProducts() { return Collections.unmodifiableList(products); }
     public List<Transaction> getBuyTransactionHistory() { return Collections.unmodifiableList(buyTransactions); }
-    public List<Notification> getBuyNotifications() { return Collections.unmodifiableList(buyNotifications); }
+    public List<Notification> getNotifications() { return Collections.unmodifiableList(notifications); }
     public List<Order> getSellOrders() { return Collections.unmodifiableList(sellOrders); }
 }
