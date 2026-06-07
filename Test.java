@@ -1,4 +1,5 @@
 import java.text.NumberFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -62,18 +63,17 @@ public class Test {
         electronics.add(laptops);
         laptops.add(macbook);
 
-        CartItem item = new CartItem(macbook, 1);
-        Order order = new Order(item, buyer);
+        Transaction t = new Transaction(buyer, LocalDate.now());
 
-        System.out.println("=== SIMULASI E-COMMERCE (SINGLE OBSERVER) ===");
+        CartItem item = new CartItem(macbook, 1);
+        Order order = new Order(item, t);
+
+        t.addOrder(order);
+
         System.out.println("Buyer  : " + buyer.getUsername());
         System.out.println("Barang : " + order.getItem().getProduct().getName());
-        System.out.println("----------------------------------------------\n");
-
-        System.out.println("[Sistem] Penjual menyerahkan barang ke kurir...");
+        System.out.println();
         order.setStatus(Order.Status.DELIVERING);
-
-        System.out.println("[Kurir] Kurir sampai di depan rumah...");
         order.setStatus(Order.Status.ARRIVED);
 
         List<Notification> userNotif = buyer.getNotifications();
@@ -81,6 +81,12 @@ public class Test {
         for (Notification n : userNotif) {
             System.out.println(n.getMessage());
             n.markAsRead();
+        }
+        System.out.println();
+
+        for (Order ord : t.getOrders()) {
+            System.out.println(ord.getItem().getProduct().getName());
+            System.out.println(ord.getBuyer().getUsername());
         }
     }
 

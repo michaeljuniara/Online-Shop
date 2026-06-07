@@ -3,13 +3,14 @@ public class Order implements OrderSubject {
 
     private Status orderStatus;
     private CartItem item;
-    private User seller;
     private OrderObserver buyer;
+    private Transaction parentTransaction;
 
-    public Order(CartItem item, User buyer) {
+    public Order(CartItem item, Transaction parentTransaction) {
         this.item = item;
-        this.seller = item.getProduct().getOwner();
-        setObserver(buyer);
+        this.parentTransaction = parentTransaction;
+
+        setObserver(parentTransaction.getBuyer());
         setStatus(Status.PACKING);
     }
     
@@ -31,6 +32,7 @@ public class Order implements OrderSubject {
 
     public Status getOrderStatus() { return orderStatus; }
     public CartItem getItem() { return item; }
-    public User getBuyer() { return (User) buyer; }
-    public User getSeller() { return seller; }
+    public User getBuyer() { return parentTransaction.getBuyer(); }
+    public User getSeller() { return item.getProduct().getOwner(); }
+    public Transaction getParentTransaction() { return parentTransaction; }
 }
