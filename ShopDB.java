@@ -72,12 +72,20 @@ public class ShopDB {
     public List<Product> getProducts() { return products; }
     public List<Category> getCategories() { return categories; }
     public Voucher getVoucher(String code) { return vouchers.get(code); }
+    
+    public Category getCategory(String name) {
+        for (Category category : categories) {
+            if (category.getName().equals(name)) return category;
+        }
 
-    public List<Product> getProductByUser(User seller) {
+        return null;
+    }
+
+    public List<Product> getProductByUser(String name) {
         List<Product> lp = new ArrayList<>();
 
         for (Product product : products) {
-            if (product.getOwner().equals(seller)) lp.add(product);
+            if (product.getOwner().getUsername().equals(name)) lp.add(product);
         }
 
         return lp;
