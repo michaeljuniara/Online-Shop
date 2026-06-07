@@ -1,3 +1,4 @@
+import java.util.Collections;
 import java.util.List;
 
 public class Cart {
@@ -5,10 +6,6 @@ public class Cart {
 
     public Cart(List<CartItem> items) {
         this.items = items;
-    }
-
-    public List<CartItem> getItems() {
-        return this.items;
     }
     
     public void addItem(CartItem item) {
@@ -35,4 +32,6 @@ public class Cart {
 
         return total;
     }
+
+    public List<CartItem> getItems() { return Collections.unmodifiableList(this.items); }
 }
