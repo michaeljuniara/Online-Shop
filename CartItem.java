@@ -11,7 +11,11 @@ public class CartItem {
         return product;
     }
 
+    public int getQuantity() {
+        return quantity;
+    }
+
     public double getTotalPrice() {
-        return product.getPrice() * quantity;
+        return getProduct().getPrice() * getQuantity();
     }
 }
