@@ -7,9 +7,12 @@ public class Order {
 
     private Status orderStatus;
     private CartItem item;
+    private User buyer, seller;
 
-    public Order(CartItem item) {
+    public Order(CartItem item, User buyer) {
         this.item = item;
+        this.buyer = buyer;
+        this.seller = item.getProduct().getOwner();
         orderStatus = Status.PACKING;
     }
     
@@ -27,5 +30,13 @@ public class Order {
         return item;
     }
 
-    public void notifyObserver() { return; }
+    public User getBuyer() {
+        return buyer;
+    }
+
+    public User getSeller() {
+        return seller;
+    }
+
+    private void notifyObserver() { return; }
 }
