@@ -36,7 +36,15 @@ public class ShopDB {
         if (p != null) {
             p.deactivate();
         }
-    } 
+    }
+    
+    public void addCategory(String name) {
+        Category c = new Category(name);
+
+        if (categories.contains(c)) return;
+
+        categories.add(c);
+    }
 
     public User loginUser(String username, String password) {
         for (User u : users) {

@@ -35,7 +35,12 @@ public class User implements OrderObserver {
         this.notifications.add(notification);
     }
 
-    public boolean equals(User other) {
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+
+        User other = (User) obj;
         return username.equals(other.username);
     }
 
