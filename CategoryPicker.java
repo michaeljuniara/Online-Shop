@@ -1,27 +1,26 @@
 import java.util.*;
 
-class CategoryPicker{
+class CategoryPicker {
     private Category chosenCategory;
-    
-    public void chooseCategory(AppContext context){
+
+    public void chooseCategory(AppContext context) {
         ShopDB db = ShopDB.getDB();
         String menuTemplate = "Berikut adalah semua kategori untuk dipilih:\n(i).\t(kategori)\n";
-        //list the categories to choose
+        // list the categories to choose
         List<Category> categories = db.getCategories();
         int index = 1;
         for (Category category : categories) {
-            menuTemplate += index+".\t"+category.getName()+"\n";
+            menuTemplate += index + ".\t" + category.getName() + "\n";
             index++;
         }
         menuTemplate += "Pilih kategori berdasarkan index:\n";
         System.out.println(menuTemplate);
 
-
         boolean loop = false;
-        do { 
+        do {
             loop = false;
             try {
-                int chosenIndex = context.sc.nextInt() - 1;
+                int chosenIndex = context.getScanner().nextInt() - 1;
                 this.chosenCategory = categories.get(chosenIndex);
             } catch (Exception e) {
                 System.out.println(e);
@@ -31,7 +30,7 @@ class CategoryPicker{
         } while (loop);
     }
 
-    public Category getChosenCategory(){
+    public Category getChosenCategory() {
         return this.chosenCategory;
     }
 }

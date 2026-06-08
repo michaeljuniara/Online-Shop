@@ -1,27 +1,28 @@
-class CreateProductMenu implements MenuState{
+class CreateProductMenu implements MenuState {
     @Override
-    public void execute(AppContext context){
+    public void execute(AppContext context) {
         User user = context.getUser();
 
         System.out.println("Nama?");
-        String name = context.sc.next();
+        String name = context.getScanner().next();
 
         System.out.println("Pilih Kategori:");
-        //Buka menu pilih kategori
+        // Buka menu pilih kategori
         CategoryPicker cpm = new CategoryPicker();
         cpm.chooseCategory(context);
         Category category = cpm.getChosenCategory();
 
         System.out.println("Deskripsi?");
-        String description = context.sc.next();
+        String description = context.getScanner().next();
 
         System.out.println("Harga?");
-        double price = context.sc.nextDouble();
+        double price = context.getScanner().nextDouble();
 
         System.out.println("Stok tersedia?");
-        int stock = context.sc.nextInt();
+        int stock = context.getScanner().nextInt();
 
-        //pilihannya adalah untuk buat produk atau kembali ke product management menu (Cancel)
+        // pilihannya adalah untuk buat produk atau kembali ke product management menu
+        // (Cancel)
         String menuTemplate = """
                     1.  Create
                     2.  Cancel
@@ -31,7 +32,7 @@ class CreateProductMenu implements MenuState{
             loop = false;
             System.out.println(menuTemplate);
             try {
-                int selection = context.sc.nextInt();
+                int selection = context.getScanner().nextInt();
                 switch (selection) {
                     case 1 -> {
                         ShopDB db = ShopDB.getDB();
@@ -43,14 +44,14 @@ class CreateProductMenu implements MenuState{
                     case 2 -> {
                         context.setMenuState(new ProductManagementMenu());
                     }
-                    
+
                     default -> loop = true;
                 }
             } catch (Exception e) {
                 System.out.println(e);
                 loop = true;
             }
-                
+
         } while (loop);
     }
 }

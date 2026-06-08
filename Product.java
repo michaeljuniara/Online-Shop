@@ -71,4 +71,9 @@ public class Product implements CategoryComponent {
     public int getStock() { return stock; }
     public Category getCategory() { return category; }
     public User getOwner() { return owner; }
+
+    @Override
+    public String toString() {
+        return name + " " + price + " " + description;
+    }
 }

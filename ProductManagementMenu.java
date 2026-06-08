@@ -11,7 +11,7 @@ class ProductManagementMenu implements MenuState{
             loop = false;
             System.out.println(menuTemplate);
             try {
-                int selection = context.sc.nextInt();
+                int selection = context.getScanner().nextInt();
                 switch (selection) {
                     case 1 -> {
                         context.setMenuState(new CreateProductMenu());

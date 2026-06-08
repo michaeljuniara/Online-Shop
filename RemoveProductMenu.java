@@ -1,33 +1,33 @@
 import java.util.List;
 
-class RemoveProductMenu implements MenuState{
+class RemoveProductMenu implements MenuState {
     @Override
-    public void execute(AppContext context){
+    public void execute(AppContext context) {
         User user = context.getUser();
         ShopDB db = ShopDB.getDB();
         String username = user.getUsername();
-        List<Product> userProducts = db.getActiveProductByUser(username); 
+        List<Product> userProducts = db.getActiveProductByUser(username);
 
-        //list all the active user Products to choose from
+        // list all the active user Products to choose from
         String menuTemplate = "List Produkmu:\n(i).\t(nama produk)\n";
 
         int index = 1;
 
         for (Product product : userProducts) {
-            menuTemplate += index+".\t"+product.getName()+"\n";
+            menuTemplate += index + ".\t" + product.getName() + "\n";
             index++;
         }
 
         menuTemplate += "Pilih produk yang mau dihapus berdasarkan index:\n";
         System.out.println(menuTemplate);
 
-        //input the index of the product
+        // input the index of the product
         boolean loop = false;
         Product chosenProduct = null;
-        do { 
+        do {
             loop = false;
             try {
-                int chosenIndex = context.sc.nextInt() - 1;
+                int chosenIndex = context.getScanner().nextInt() - 1;
                 chosenProduct = userProducts.get(chosenIndex);
 
             } catch (Exception e) {
@@ -37,7 +37,8 @@ class RemoveProductMenu implements MenuState{
 
         } while (loop);
 
-        if (chosenProduct != null) System.out.println("Product chosen:"+ chosenProduct.getName());
+        if (chosenProduct != null)
+            System.out.println("Product chosen:" + chosenProduct.getName());
 
         //
         menuTemplate = """
@@ -50,7 +51,7 @@ class RemoveProductMenu implements MenuState{
             loop = false;
             System.out.println(menuTemplate);
             try {
-                int selection = context.sc.nextInt();
+                int selection = context.getScanner().nextInt();
                 switch (selection) {
                     case 1 -> {
                         db.deactivateProduct(chosenProduct);
@@ -60,13 +61,13 @@ class RemoveProductMenu implements MenuState{
                     case 2 -> {
                         context.setMenuState(new ProductManagementMenu());
                     }
-                    
+
                     default -> loop = true;
                 }
             } catch (Exception e) {
                 System.out.println(e);
             }
-                
+
         } while (loop);
 
     }
