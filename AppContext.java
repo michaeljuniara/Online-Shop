@@ -5,22 +5,22 @@ class AppContext {
     private Scanner sc;
 
 
-    void run(){
+    public void run(){
         currentState.execute(this);
     }
 
-    User getUser(){
+    public User getUser(){
         return this.user;
     }
 
-    boolean setUser(User user){
+    public boolean setUser(User user){
         if (user == null) return false;
         this.user = user;
         return true;
     }
 
     //the method setMenuState actually also runs the menuState (intentional design decision), albeit going against the supposed function of the method.
-    void setMenuState(MenuState state){
+    public void setMenuState(MenuState state){
         this.currentState = state;
         run();
     }
