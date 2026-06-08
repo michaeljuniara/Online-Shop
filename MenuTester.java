@@ -12,10 +12,13 @@ public class MenuTester {
 
         electronics.add(laptops);
         electronics.add(gaming);
+        electronics.add(phones);
+
+        User ian = db.loginUser("Ian", "yay");
+        db.addProduct(ian, "Pelumas wow", gaming, "Agar mesinmu tidak macet gunakanlah Pelumas wow!!!", 69.42, 1);
         
         db.addCategory(electronics);
         
-
         AppContext context = new AppContext(sc);
         context.run();
     }
