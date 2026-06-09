@@ -13,61 +13,69 @@ class RemoveProductMenu implements MenuState{
 
         int index = 1;
 
-        for (Product product : userProducts) {
-            menuTemplate += index+".\t"+product.getName()+"\n";
-            index++;
-        }
-
-        menuTemplate += "Pilih produk yang mau dihapus berdasarkan index:\n";
-        System.out.println(menuTemplate);
-
-        //input the index of the product
-        boolean loop = false;
-        Product chosenProduct = null;
-        do { 
-            loop = false;
-            try {
-                int chosenIndex = context.sc.nextInt() - 1;
-                chosenProduct = userProducts.get(chosenIndex);
-
-            } catch (Exception e) {
-                System.out.println(e);
-                loop = true;
+        if (userProducts.size() > 0) {
+            for (Product product : userProducts) {
+                menuTemplate += index+".\t"+product.getName()+"\n";
+                index++;
             }
 
-        } while (loop);
-
-        if (chosenProduct != null) System.out.println("Product chosen:"+ chosenProduct.getName());
-
-        //
-        menuTemplate = """
-                1.  Hapus produk (PERINGATAN: TIDAK BISA DIAKTIFKAN KEMBALI)
-                2.  Cancel
-                """;
-
-        loop = false;
-        do {
-            loop = false;
+            menuTemplate += "Pilih produk yang mau dihapus berdasarkan index:\n";
             System.out.println(menuTemplate);
-            try {
-                int selection = context.sc.nextInt();
-                switch (selection) {
-                    case 1 -> {
-                        db.deactivateProduct(chosenProduct);
-                        System.out.println("-------------PRODUK TERHAPUS----------------");
-                        context.setMenuState(new ProductManagementMenu());
-                    }
-                    case 2 -> {
-                        context.setMenuState(new ProductManagementMenu());
-                    }
-                    
-                    default -> loop = true;
-                }
-            } catch (Exception e) {
-                System.out.println(e);
-            }
-                
-        } while (loop);
 
+            //input the index of the product
+            boolean loop = false;
+            Product chosenProduct = null;
+            do { 
+                loop = false;
+                try {
+                    int chosenIndex = context.sc.nextInt() - 1;
+                    chosenProduct = userProducts.get(chosenIndex);
+
+                } catch (Exception e) {
+                    System.out.println(e);
+                    loop = true;
+                }
+
+            } while (loop);
+
+            if (chosenProduct != null) System.out.println("Product chosen:"+ chosenProduct.getName());
+
+            //
+            menuTemplate = """
+                    1.  Hapus produk (PERINGATAN: TIDAK BISA DIAKTIFKAN KEMBALI)
+                    2.  Cancel
+                    """;
+
+            loop = false;
+            do {
+                loop = false;
+                System.out.println(menuTemplate);
+                try {
+                    int selection = context.sc.nextInt();
+                    switch (selection) {
+                        case 1 -> {
+                            db.deactivateProduct(chosenProduct);
+                            System.out.println("-------------PRODUK TERHAPUS----------------");
+                            context.setMenuState(new ProductManagementMenu());
+                        }
+                        case 2 -> {
+                            context.setMenuState(new ProductManagementMenu());
+                        }
+                        
+                        default -> loop = true;
+                    }
+                } catch (Exception e) {
+                    System.out.println(e);
+                }
+                    
+            } while (loop);
+        } else {
+            System.out.println("""
+                    Anda tidak memiliki produk.
+                    Buatlah sebuah produk terlebih dahulu.
+                    """);
+            context.setMenuState(new ProductManagementMenu());
+        }
+        
     }
 }
