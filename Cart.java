@@ -1,5 +1,5 @@
-import java.util.Collections;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Cart {
@@ -12,13 +12,18 @@ public class Cart {
     
     public void addItem(Product product, int quantity) {
         CartItem ci = new CartItem(product, quantity);
-
-        items.add(ci);
+        if (product.tempBuy(quantity)){
+            if(product.getStock() <= 0) product.deactivate();
+            items.add(ci);
+        }
+        
+        
     }
 
     public boolean removeItem(int itemNumber) {
         if (itemNumber < 0 || itemNumber >= items.size()) return false;
-
+        CartItem chosenCartitem = items.get(itemNumber);
+        chosenCartitem.getProduct().cancelBuy(chosenCartitem.getQuantity());
         items.remove(itemNumber);
         return true;
     }
@@ -34,6 +39,9 @@ public class Cart {
     }
 
     public void clearCart() {
+        for (CartItem cartItem : items) {
+            cartItem.getProduct().cancelBuy(cartItem.getQuantity());
+        }
         this.items.clear();
     }
 

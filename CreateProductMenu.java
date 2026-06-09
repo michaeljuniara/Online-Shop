@@ -36,7 +36,6 @@ class CreateProductMenu implements MenuState{
                     case 1 -> {
                         ShopDB db = ShopDB.getDB();
                         db.addProduct(user, name, category, description, price, stock);
-                        System.out.println(db.getActiveProducts().toArray().toString());
                         System.out.println("--------------Product Created!--------------\n");
                         context.setMenuState(new ProductManagementMenu());
                     }
@@ -48,7 +47,6 @@ class CreateProductMenu implements MenuState{
                 }
             } catch (Exception e) {
                 System.out.println(e);
-                loop = true;
             }
                 
         } while (loop);

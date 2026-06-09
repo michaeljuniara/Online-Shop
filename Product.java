@@ -19,6 +19,7 @@ public class Product implements CategoryComponent {
         this.active = true;//change
     }
 
+    @Override
     public void getProducts(List<Product> list) { list.add(this); }
 
     public void deactivate() {

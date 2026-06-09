@@ -1,13 +1,13 @@
-public class BuyerMainMenu implements MenuState{
+class BuyerMainMenu implements MenuState{
     @Override
     public void execute(AppContext context){
         String menuTemplate = """
                 1.  Cari Produk
                 2.  Lihat Keranjang
                 3.  Lihat History Transaksi
-                4.  Lihat History Pemesanan
-                5.  Lihat Notifikasi
-                6.  Keluar Aplikasi
+                4.  Lihat Notifikasi
+                5.  Keluar Aplikasi
+                6.  Logout
                 """;
         boolean loop = false;
             do {
@@ -17,22 +17,22 @@ public class BuyerMainMenu implements MenuState{
                     int selection = context.sc.nextInt();
                     switch (selection) {
                         case 1 -> {
-                            context.setMenuState(new BuyerMainMenu());
+                            context.setMenuState(new ProductSearchMenu());
                         }
                         case 2 -> {
-                            context.setMenuState(new MerchantMainMenu());
+                            context.setMenuState(new CartMenu());
                         }
                         case 3 -> {
-                            context.setMenuState(new MerchantMainMenu());
+                            context.setMenuState(new OrderHistoryMenu());//
                         }
                         case 4 -> {
-                            context.setMenuState(new MerchantMainMenu());
+                            context.setMenuState(new NotificationsMenu());//
                         }
                         case 5 -> {
-                            context.setMenuState(new MerchantMainMenu());
+                            System.out.println("program exited");
                         }
                         case 6 -> {
-                            System.out.println("program exited");
+                            context.setMenuState(new LoginMenu());//NOT SAFE, NOT ACTUALLY LOGGED OUT
                         }
                         default -> loop = true;
                     }

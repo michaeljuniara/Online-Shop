@@ -11,6 +11,9 @@ class SellTransactionMenuAtDate implements MenuState{
                 menuTemplate += index+".\t"+transaction.getBuyer() + " "+ transaction.getPrice();
                 index++;
             }
+            menuTemplate = """
+                    1.  Kembali
+                    """;
             boolean loop = false;
             do {
                 loop = false;

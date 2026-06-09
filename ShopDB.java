@@ -18,12 +18,14 @@ public class ShopDB {
 
     public void addProduct(User owner, String name, Category category, String description, double price, int stock) {
         Product p = new Product(owner, name, category, description, price, stock);
+        category.add(p);
         products.add(p);
     }
 
     public void editProduct(Product p, String name, Category category, String description, double price, int stock) {
         p.setName(name);
         p.setCategory(category);
+        category.add(p);
         p.setDescription(description);
         p.setPrice(price);
         p.setStock(stock);
@@ -71,6 +73,16 @@ public class ShopDB {
 
         for (Product product : this.products) {
             if (product.isActive())lp.add(product);
+        }
+
+        return lp;
+    }
+
+        public List<Product> getActiveProducts(String name) {//hanya mengembalikan product yang aktif dari nama produk //change
+        List<Product> lp = new ArrayList<>();
+
+        for (Product product : this.products) {
+            if (product.isActive() && product.getName().equals(name))lp.add(product);
         }
 
         return lp;

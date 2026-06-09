@@ -10,8 +10,8 @@ class NotificationsMenu implements MenuState{
             menuTemplate += ""+index+".\t"+notif.toString()+"\n";
             index++;
         }
-        menuTemplate += "Enter 0 to go back to main menu.";
-        System.out.println(menuTemplate);
+        menuTemplate += "Enter 1 to go back to main menu.";
+        //System.out.println(menuTemplate);
         boolean loop = false;
             do {
                 loop = false;
@@ -19,7 +19,7 @@ class NotificationsMenu implements MenuState{
                 try {
                     int selection = context.sc.nextInt();
                     switch (selection) {
-                        case 0 -> {
+                        case 1 -> {
                             context.setMenuState(new BuyerMainMenu());
                         }
 
