@@ -1,12 +1,12 @@
 class EditProductMenu implements MenuState{
-    Product product;
+    private Product product;
     
     @Override
     public void execute(AppContext context){
         User user = context.getUser();
 
         System.out.println("Nama?");
-        String name = context.sc.next();
+        String name = context.getSc().next();
 
         System.out.println("Pilih Kategori:");
         //Buka menu pilih kategori
@@ -15,13 +15,13 @@ class EditProductMenu implements MenuState{
         Category category = cpm.getChosenCategory();
         
         System.out.println("Deskripsi?");
-        String description = context.sc.next();
+        String description = context.getSc().next();
 
         System.out.println("Harga?");
-        double price = context.sc.nextDouble();
+        double price = context.getSc().nextDouble();
 
         System.out.println("Stok tersedia?");
-        int stock = context.sc.nextInt();
+        int stock = context.getSc().nextInt();
 
         //pilihannya adalah untuk buat produk atau kembali ke product management menu (Cancel)
         String menuTemplate = """
@@ -33,7 +33,7 @@ class EditProductMenu implements MenuState{
             loop = false;
             System.out.println(menuTemplate);
             try {
-                int selection = context.sc.nextInt();
+                int selection = context.getSc().nextInt();
                 switch (selection) {
                     case 1 -> {
                         ShopDB db = ShopDB.getDB();

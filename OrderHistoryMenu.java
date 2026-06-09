@@ -27,7 +27,7 @@ class OrderHistoryMenu implements MenuState{
             System.out.println(menuTemplate);
             
             try {
-                int selection = context.sc.nextInt();
+                int selection = context.getSc().nextInt();
                 switch (selection) {
                 
                     case 1 -> {

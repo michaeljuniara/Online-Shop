@@ -14,7 +14,7 @@ class BuyerMainMenu implements MenuState{
                 loop = false;
                 System.out.println(menuTemplate);
                 try {
-                    int selection = context.sc.nextInt();
+                    int selection = context.getSc().nextInt();
                     switch (selection) {
                         case 1 -> {
                             context.setMenuState(new ProductSearchMenu());

@@ -44,13 +44,13 @@ class SellTransactionMenu implements MenuState{
         System.out.println(menuTemplate);
         
 
-        int chosenDateIndex = context.sc.nextInt() - 1;
+        int chosenDateIndex = context.getSc().nextInt() - 1;
 
         //kalau index tidak valid
         while (chosenDateIndex < 0 || chosenDateIndex > allSavedLocalDate.size()-1){
             System.out.println("Index tidak valid, mohon input index yang valid:");
             System.out.println(menuTemplate);
-            chosenDateIndex = context.sc.nextInt() - 1;
+            chosenDateIndex = context.getSc().nextInt() - 1;
         }
 
         //Date ditentukan, buat List Transaksi dengan Date yang ditemukan
@@ -73,7 +73,8 @@ class SellTransactionMenu implements MenuState{
             loop = false;
             System.out.println(menuTemplate);
             try {
-                int selection = context.sc.nextInt();
+                int selection = context.getSc()
+                .nextInt();
                 switch (selection) {
                     case 1 -> {
                         context.setMenuState(new SellTransactionMenuAtDate(transactionsAtDate, chosenDate));

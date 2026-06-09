@@ -28,7 +28,7 @@ class RemoveProductMenu implements MenuState{
             do { 
                 loop = false;
                 try {
-                    int chosenIndex = context.sc.nextInt() - 1;
+                    int chosenIndex = context.getSc().nextInt() - 1;
                     chosenProduct = userProducts.get(chosenIndex);
 
                 } catch (Exception e) {
@@ -51,7 +51,7 @@ class RemoveProductMenu implements MenuState{
                 loop = false;
                 System.out.println(menuTemplate);
                 try {
-                    int selection = context.sc.nextInt();
+                    int selection = context.getSc().nextInt();
                     switch (selection) {
                         case 1 -> {
                             db.deactivateProduct(chosenProduct);

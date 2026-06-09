@@ -1,8 +1,8 @@
 import java.time.LocalDate;
 import java.util.*;
 class SellTransactionMenuAtDate implements MenuState{
-    List<Transaction> transactions;
-    LocalDate chosenDate;
+    private List<Transaction> transactions;
+    private LocalDate chosenDate;
     @Override
     public void execute(AppContext context){
             String menuTemplate = "List transaksi pada tanggal "+chosenDate;
@@ -20,7 +20,7 @@ class SellTransactionMenuAtDate implements MenuState{
                 System.out.println(menuTemplate);
                 
                 try {
-                    int selection = context.sc.nextInt();
+                    int selection = context.getSc().nextInt();
                     switch (selection) {
                     case 1 -> {
                         context.setMenuState(new SellTransactionMenu());

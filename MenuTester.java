@@ -1,4 +1,5 @@
 import java.util.Scanner;
+
 public class MenuTester {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -14,13 +15,12 @@ public class MenuTester {
         electronics.add(gaming);
         db.addCategory(electronics);
 
-        
         db.addProduct(ShopDB.getDB().loginUser("Ian", "yay"), "kursi", electronics, "aaaaa", 1000, 1);
         db.addProduct(ShopDB.getDB().loginUser("Ian", "yay"), "pikachu", electronics, "bzzzzzz", 1000, 2);
-        
+
         Voucher vo1 = new Voucher("min100", 100, 3);
         db.addVoucher(vo1);
-        
+
         AppContext context = new AppContext(sc);
         context.run();
     }

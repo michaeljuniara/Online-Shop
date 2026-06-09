@@ -11,7 +11,7 @@ class SearchProductByNameMenu implements MenuState{
             System.out.println(menuTemplate);
             
             try {
-                String potentialProductName = context.sc.next();
+                String potentialProductName = context.getSc().next();
                 List<Product> productsByName = ShopDB.getDB().getActiveProducts(potentialProductName);
                 if (!productsByName.isEmpty()){
                     context.setMenuState(new WindowShoppingMenu(productsByName));

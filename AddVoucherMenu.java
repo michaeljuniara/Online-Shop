@@ -1,6 +1,6 @@
-class AddVoucherMenu implements MenuState{
+class AddVoucherMenu implements MenuState {
     @Override
-    public void execute(AppContext context){
+    public void execute(AppContext context) {
         String menuTemplate = """
                 Masukkan kode voucher:
 
@@ -8,16 +8,17 @@ class AddVoucherMenu implements MenuState{
         User user = context.getUser();
         Cart userCart = user.getCart();
         boolean loop = false;
-        do { 
+        do {
             try {
                 loop = false;
                 System.out.println(menuTemplate);
-                String inputtedCode = context.sc.next();
-                if (userCart.setVoucher(inputtedCode)){
-                    context.setMenuState(new CheckOutFacade());
-                }else{
-                    loop = true;
+                String inputtedCode = context.getSc().next();
+                if (userCart.setVoucher(inputtedCode)) {
+                    Voucher v = ShopDB.getDB().getVoucher(inputtedCode);
+                    context.setMenuState(new CheckOutFacade(v));
+                } else {
                     System.out.println("Kode Voucher salah, coba lagi:");
+                    context.setMenuState(new BuyMenu());
                 }
             } catch (Exception e) {
                 System.out.println(e);

@@ -21,7 +21,7 @@ class CategoryPicker{
         do { 
             loop = false;
             try {
-                int chosenIndex = context.sc.nextInt() - 1;
+                int chosenIndex = context.getSc().nextInt() - 1;
                 this.chosenCategory = categories.get(chosenIndex);
             } catch (Exception e) {
                 System.out.println(e);

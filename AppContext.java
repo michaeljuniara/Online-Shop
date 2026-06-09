@@ -1,8 +1,8 @@
 import java.util.Scanner;
 class AppContext {
-    MenuState currentState;
-    User user;
-    Scanner sc;
+    private MenuState currentState;
+    private User user;
+    private Scanner sc;
 
 
     void run(){
@@ -32,4 +32,20 @@ class AppContext {
         this.sc = sc;
     }
 
+    public MenuState getCurrentState() {
+        return currentState;
+    }
+
+    public void setCurrentState(MenuState currentState) {
+        this.currentState = currentState;
+    }
+
+    public Scanner getSc() {
+        return sc;
+    }
+
+    public void setSc(Scanner sc) {
+        this.sc = sc;
+    }
+    
 }

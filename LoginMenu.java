@@ -7,9 +7,9 @@ class LoginMenu implements MenuState{
                 Username    :""";
         System.out.print(menuTemplate);
 
-        String inUsername = context.sc.next();
+        String inUsername = context.getSc().next();
         System.out.print("Password    :");
-        String inPassword= context.sc.next();
+        String inPassword= context.getSc().next();
         ShopDB DBInstance = ShopDB.getDB();
         boolean loginSuccessful = context.setUser(DBInstance.loginUser(inUsername, inPassword));
 
@@ -33,7 +33,7 @@ class LoginMenu implements MenuState{
                 
                 try {
                     
-                    int selection = context.sc.nextInt();
+                    int selection = context.getSc().nextInt();
                     switch (selection) {
                     case 1 -> {
                         context.setMenuState(new BuyerMainMenu());
@@ -62,7 +62,7 @@ class LoginMenu implements MenuState{
             do {
                 loop = false;
                 System.out.println(failedMenuTemplate);
-                int selection = context.sc.nextInt();
+                int selection = context.getSc().nextInt();
                 try {
                     switch (selection) {
                     case 1 -> { 

@@ -29,7 +29,7 @@ class WindowShoppingMenu implements MenuState{
         do { 
             loop = false;
             try {
-                int chosenIndex = context.sc.nextInt() - 1;
+                int chosenIndex = context.getSc().nextInt() - 1;
                 chosenProduct = this.productList.get(chosenIndex);
 
             } catch (Exception e) {
@@ -52,7 +52,7 @@ class WindowShoppingMenu implements MenuState{
             loop = false;
             System.out.println(menuTemplate);
             try {
-                int selection = context.sc.nextInt();
+                int selection = context.getSc().nextInt();
                 switch (selection) {
                     case 1 -> {
                         context.setMenuState(new PutProductInCartMenu(chosenProduct));//

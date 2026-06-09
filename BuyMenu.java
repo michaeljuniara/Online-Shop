@@ -13,13 +13,13 @@ class BuyMenu implements MenuState{
             loop = false;
             System.out.println(menuTemplate);
             try {
-                int selection = context.sc.nextInt();
+                int selection = context.getSc().nextInt();
                 switch (selection) {
                     case 1 -> {
                         context.setMenuState(new AddVoucherMenu());
                     }
                     case 2 -> {
-                        context.setMenuState(new CheckOutFacade());
+                        context.setMenuState(new CheckOutFacade(null));
                     }
                     case 3 -> {
                         context.setMenuState(new CartMenu());
