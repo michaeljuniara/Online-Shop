@@ -1,33 +1,50 @@
-class AddCartItemMenu implements MenuState{
-    
-    Product chosenProduct;
-    
+class AddCartItemMenu implements MenuState {
+
+    private Product chosenProduct;
+
     @Override
-    public void execute(AppContext context){
+    public void execute(AppContext context) {
         Cart userCart = context.getUser().getCart();
-        String menuTemplate = "Stok produk penjual saat ini: ";
+        String menuTemplate = "\nStok produk penjual saat ini : ";
         menuTemplate += chosenProduct.getStock();
-        menuTemplate += " stok\n\n";
-        menuTemplate += "Isi kuantitas:\n";
+        menuTemplate += "\n0. Kembali\n";
+        menuTemplate += "Isi kuantitas: ";
         int newQuantity = 0;
         boolean loop = false;
 
         do {
             loop = false;
-            System.out.println(menuTemplate);
-            newQuantity = context.sc.nextInt();
-            if (newQuantity > chosenProduct.getStock()){
+            System.out.print(menuTemplate);
+            try {
+                newQuantity = context.getSc().nextInt();
+                context.getSc().nextLine();
+                if (newQuantity == 0) {
+                    context.setMenuState(new ProductSearchMenu());
+                } else if (newQuantity < 0) {
+                    System.out.println("\nKuantitas tidak boleh negatif.\n");
+                    loop = true;
+                } else if (newQuantity > chosenProduct.getStock()) {
+                    System.out.print("\nKuantitas masih lebih banyak dari stok.\n");
+                    loop = true;
+                } else if (newQuantity <= chosenProduct.getStock()) {
+                    System.out.print("\nProduk berhasil ditambahkan ke keranjang.\n");
+                    userCart.addItem(this.chosenProduct, newQuantity);
+                    context.setMenuState(new BuyerMainMenu());
+                } else {
+                    System.out.println("\nMasukkan angka yang valid.\n");
+                    loop = true;
+                }
+
+            } catch (Exception e) {
+                System.out.println("\nMasukkan angka yang valid.\n");
+                context.getSc().nextLine();
                 loop = true;
-                System.out.println("Kuantitas masih lebih banyak dari stok.");
-            }            
+            }
         } while (loop);
 
-        //efektif beneran memasukkan Product sebagai cartItem ke dalam keranjang user
-        userCart.addItem(this.chosenProduct, newQuantity);
-        context.setMenuState(new BuyerMainMenu());
     }
 
-    public AddCartItemMenu(Product chosenProduct){
+    public AddCartItemMenu(Product chosenProduct) {
         this.chosenProduct = chosenProduct;
     }
 }

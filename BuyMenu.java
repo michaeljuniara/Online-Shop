@@ -1,6 +1,6 @@
-class BuyMenu implements MenuState{
+class BuyMenu implements MenuState {
     @Override
-    public void execute(AppContext context){
+    public void execute(AppContext context) {
         String menuTemplate = """
                 Masukkan Voucher?
                 1.  Ya
@@ -13,23 +13,29 @@ class BuyMenu implements MenuState{
             loop = false;
             System.out.println(menuTemplate);
             try {
-                int selection = context.sc.nextInt();
+                int selection = context.getSc().nextInt();
                 switch (selection) {
                     case 1 -> {
                         context.setMenuState(new AddVoucherMenu());
                     }
                     case 2 -> {
-                        context.setMenuState(new CheckOutFacade());
+                        context.setMenuState(new CheckOutMenu(null, context));
                     }
                     case 3 -> {
                         context.setMenuState(new CartMenu());
-                    }                 
-                    default -> loop = true;
+                    }
+                    default -> {
+                        System.out.print("\nMasukkan angka yang valid.\n");
+                        context.getSc().nextLine();
+                        loop = true;
+                    }
                 }
             } catch (Exception e) {
-                System.out.println(e);
+                System.out.print("\nMasukkan angka yang valid.\n");
+                context.getSc().nextLine();
+                loop = true;
             }
-                
+
         } while (loop);
     }
 }

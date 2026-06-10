@@ -2,22 +2,20 @@ import java.util.List;
 import java.time.LocalDate;
 import java.util.LinkedList;
 
-class SellTransactionMenu implements MenuState{
+class SellTransactionMenu implements MenuState {
     @Override
-    public void execute(AppContext context){
+    public void execute(AppContext context) {
         User user = context.getUser();
         List<Order> orders = user.getSellOrders();
-        
+
         List<Transaction> transactions = new LinkedList<>();
-        
+
         for (Order order : orders) {
             Transaction orderTransaction = order.getParentTransaction();
-            if (!transactions.contains(orderTransaction)){
+            if (!transactions.contains(orderTransaction)) {
                 transactions.add(orderTransaction);
             }
         }
-
-
 
         String menuTemplate = """
                     List Riwayat Transaksi
@@ -28,13 +26,13 @@ class SellTransactionMenu implements MenuState{
 
         List<LocalDate> allSavedLocalDate = new LinkedList<>();
 
-        //tampilan semua date terjadinya transaksi (distinct)
+        // tampilan semua date terjadinya transaksi (distinct)
         for (Transaction transaction : transactions) {
 
             LocalDate curDate = transaction.getTransactionDate();
 
-            if (!allSavedLocalDate.contains(curDate)){
-                menuTemplate += index+".\t"+curDate+"\n";
+            if (!allSavedLocalDate.contains(curDate)) {
+                menuTemplate += index + ".\t" + curDate + "\n";
                 allSavedLocalDate.add(curDate);
                 index++;
             }
@@ -42,23 +40,22 @@ class SellTransactionMenu implements MenuState{
 
         menuTemplate += "Pilih (i) dari list tanggal\n";
         System.out.println(menuTemplate);
-        
 
-        int chosenDateIndex = context.sc.nextInt() - 1;
+        int chosenDateIndex = context.getSc().nextInt() - 1;
 
-        //kalau index tidak valid
-        while (chosenDateIndex < 0 || chosenDateIndex > allSavedLocalDate.size()-1){
+        // kalau index tidak valid
+        while (chosenDateIndex < 0 || chosenDateIndex > allSavedLocalDate.size() - 1) {
             System.out.println("Index tidak valid, mohon input index yang valid:");
             System.out.println(menuTemplate);
-            chosenDateIndex = context.sc.nextInt() - 1;
+            chosenDateIndex = context.getSc().nextInt() - 1;
         }
 
-        //Date ditentukan, buat List Transaksi dengan Date yang ditemukan
+        // Date ditentukan, buat List Transaksi dengan Date yang ditemukan
         LocalDate chosenDate = allSavedLocalDate.get(chosenDateIndex);
         List<Transaction> transactionsAtDate = new LinkedList<>();
 
         for (Transaction transaction : transactions) {
-            if (transaction.getTransactionDate().equals(chosenDate)){
+            if (transaction.getTransactionDate().equals(chosenDate)) {
                 transactionsAtDate.add(transaction);
             }
         }
@@ -73,7 +70,8 @@ class SellTransactionMenu implements MenuState{
             loop = false;
             System.out.println(menuTemplate);
             try {
-                int selection = context.sc.nextInt();
+                int selection = context.getSc()
+                        .nextInt();
                 switch (selection) {
                     case 1 -> {
                         context.setMenuState(new SellTransactionMenuAtDate(transactionsAtDate, chosenDate));

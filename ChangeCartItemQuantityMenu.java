@@ -1,7 +1,7 @@
 class ChangeCartItemQuantityMenu implements MenuState{
-    Cart userCart;
-    CartItem cartItem;
-    int cartItemIndex;
+    private Cart userCart;
+    private CartItem cartItem;
+    private int cartItemIndex;
 
     @Override
     public void execute(AppContext context){
@@ -17,7 +17,7 @@ class ChangeCartItemQuantityMenu implements MenuState{
         do {
             loop = false;
             System.out.println(menuTemplate);
-            newQuantity = context.sc.nextInt();
+            newQuantity = context.getSc().nextInt();
             if (newQuantity > cartItem.getProduct().getStock()){
                 loop = true;
                 System.out.println("Kuantitas masih terlalu banyak");

@@ -22,7 +22,7 @@ class PutProductInCartMenu implements MenuState{
             loop = false;
             System.out.println(menuTemplate);
             try {
-                int selection = context.sc.nextInt();
+                int selection = context.getSc().nextInt();
                 switch (selection) {
                     case 1 -> {
                         context.setMenuState(new AddCartItemMenu(this.chosenProduct));
@@ -38,10 +38,6 @@ class PutProductInCartMenu implements MenuState{
             }
                 
         } while (loop);
-
-
-
-
     }
     
     public PutProductInCartMenu(Product chosenProduct){

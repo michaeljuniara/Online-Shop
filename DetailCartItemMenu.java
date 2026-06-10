@@ -1,15 +1,17 @@
-public class DetailCartItemMenu implements MenuState{
+public class DetailCartItemMenu implements MenuState {
     private int cartItemIndex;
     private CartItem cartItem;
     private Cart userCart;
+
     @Override
-    public void execute(AppContext context){
+    public void execute(AppContext context) {
         String menuTemplate = """
                 Detail Produk:
                 """;
-        menuTemplate += "Nama:\t"+cartItem.getProduct().getName()+"\nHarga:\t"+cartItem.getTotalPrice();
-        menuTemplate += "\nStok:\t"+cartItem.getProduct().getStock()+"\nDeskripsi:\t"+cartItem.getProduct().getDescription();
-        menuTemplate += "\nKuantitas:\t"+cartItem.getQuantity();
+        menuTemplate += "Nama:\t" + cartItem.getProduct().getName() + "\nHarga:\t" + cartItem.getTotalPrice();
+        menuTemplate += "\nStok:\t" + cartItem.getProduct().getStock() + "\nDeskripsi:\t"
+                + cartItem.getProduct().getDescription();
+        menuTemplate += "\nKuantitas:\t" + cartItem.getQuantity();
 
         System.out.println(menuTemplate);
 
@@ -23,10 +25,11 @@ public class DetailCartItemMenu implements MenuState{
             loop = false;
             System.out.println(menuTemplate);
             try {
-                int selection = context.sc.nextInt();
+                int selection = context.getSc().nextInt();
                 switch (selection) {
                     case 1 -> {
-                        context.setMenuState(new ChangeCartItemQuantityMenu(this.userCart, this.cartItem, this.cartItemIndex));
+                        context.setMenuState(
+                                new ChangeCartItemQuantityMenu(this.userCart, this.cartItem, this.cartItemIndex));
                     }
                     case 2 -> {
                         userCart.removeItem(this.cartItemIndex);
@@ -35,17 +38,23 @@ public class DetailCartItemMenu implements MenuState{
                     }
                     case 3 -> {
                         context.setMenuState(new CartMenu());
-                    }             
-                    default -> loop = true;
+                    }
+                    default -> {
+                        System.out.print("\nMasukkan angka yang valid.\n");
+                        context.getSc().nextLine();
+                        loop = true;
+                    }
                 }
             } catch (Exception e) {
-                System.out.println(e);
+                System.out.print("\nMasukkan angka yang valid.\n");
+                context.getSc().nextLine();
+                loop = true;
             }
-                
+
         } while (loop);
     }
 
-    public DetailCartItemMenu(Cart userCart, CartItem chosenCartItem, int chosenCartItemIndex){
+    public DetailCartItemMenu(Cart userCart, CartItem chosenCartItem, int chosenCartItemIndex) {
         this.cartItemIndex = chosenCartItemIndex;
         this.cartItem = chosenCartItem;
         this.userCart = userCart;

@@ -1,37 +1,43 @@
-import java.util.*;
+import java.util.List;
 
-class CategoryPicker{
+class CategoryPicker {
     private Category chosenCategory;
-    
-    public void chooseCategory(AppContext context){
+
+    public void chooseCategory(AppContext context) {
         ShopDB db = ShopDB.getDB();
-        String menuTemplate = "Berikut adalah semua kategori untuk dipilih:\n(i).\t(kategori)\n";
-        //list the categories to choose
+        String menuTemplate = "\nBerikut adalah semua kategori untuk dipilih:\n(i).\t (kategori)\n";
+        // list the categories to choose
         List<Category> categories = db.getCategories();
         int index = 1;
         for (Category category : categories) {
-            menuTemplate += index+".\t"+category.getName()+"\n";
+            menuTemplate += index + ".\t" + category.getName() + "\n";
             index++;
         }
-        menuTemplate += "Pilih kategori berdasarkan index:\n";
-        System.out.println(menuTemplate);
-
+        menuTemplate += "\nPilih kategori berdasarkan index : ";
 
         boolean loop = false;
-        do { 
+        do {
             loop = false;
+            System.out.print(menuTemplate);
             try {
-                int chosenIndex = context.sc.nextInt() - 1;
-                this.chosenCategory = categories.get(chosenIndex);
+                int chosenIndex = context.getSc().nextInt() - 1;
+                if (categories.get(chosenIndex) != null) {
+                    this.chosenCategory = categories.get(chosenIndex);
+                } else {
+                    System.out.println("\nMasukkan angka yang valid.");
+                    context.getSc().nextLine();
+                    loop = true;
+                }
             } catch (Exception e) {
-                System.out.println(e);
+                System.out.println("\nMasukkan angka yang valid.");
+                context.getSc().nextLine();
                 loop = true;
             }
 
         } while (loop);
     }
 
-    public Category getChosenCategory(){
+    public Category getChosenCategory() {
         return this.chosenCategory;
     }
 }

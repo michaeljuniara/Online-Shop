@@ -1,6 +1,6 @@
-class MerchantMainMenu implements MenuState{
+class MerchantMainMenu implements MenuState {
     @Override
-    public void execute(AppContext context){
+    public void execute(AppContext context) {
         String menuTemplate = """
                 1.  Kelola Produk
                 2.  Lihat History Transaksi
@@ -12,7 +12,7 @@ class MerchantMainMenu implements MenuState{
             loop = false;
             System.out.println(menuTemplate);
             try {
-                int selection = context.sc.nextInt();
+                int selection = context.getSc().nextInt();
                 switch (selection) {
                     case 1 -> {
                         context.setMenuState(new ProductManagementMenu());
@@ -24,15 +24,21 @@ class MerchantMainMenu implements MenuState{
                         System.out.println("program exited");
                     }
                     case 4 -> {
-                        context.setMenuState(new LoginMenu());//NOT SAFE, NOT ACTUALLY LOGGED OUT
+                        context.setMenuState(new LoginMenu());// NOT SAFE, NOT ACTUALLY LOGGED OUT
                     }
-                    default -> loop = true;
+                    default -> {
+                        System.out.print("\nMasukkan angka yang valid.\n");
+                        context.getSc().nextLine();
+                        loop = true;
+                    }
                 }
             } catch (Exception e) {
-                System.out.println(e);
-                //loop = true; breaks things somehow, don't really understand
+                System.out.print("\nMasukkan angka yang valid.\n");
+                context.getSc().nextLine();
+                loop = true;
+                // loop = true; breaks things somehow, don't really understand
             }
-                
+
         } while (loop);
     }
 }

@@ -1,7 +1,8 @@
-class BuyerMainMenu implements MenuState{
+class BuyerMainMenu implements MenuState {
     @Override
-    public void execute(AppContext context){
+    public void execute(AppContext context) {
         String menuTemplate = """
+
                 1.  Cari Produk
                 2.  Lihat Keranjang
                 3.  Lihat History Transaksi
@@ -10,38 +11,43 @@ class BuyerMainMenu implements MenuState{
                 6.  Logout
                 """;
         boolean loop = false;
-            do {
-                loop = false;
-                System.out.println(menuTemplate);
-                try {
-                    int selection = context.sc.nextInt();
-                    switch (selection) {
-                        case 1 -> {
-                            context.setMenuState(new ProductSearchMenu());
-                        }
-                        case 2 -> {
-                            context.setMenuState(new CartMenu());
-                        }
-                        case 3 -> {
-                            context.setMenuState(new OrderHistoryMenu());//
-                        }
-                        case 4 -> {
-                            context.setMenuState(new NotificationsMenu());//
-                        }
-                        case 5 -> {
-                            System.out.println("program exited");
-                        }
-                        case 6 -> {
-                            context.setMenuState(new LoginMenu());//NOT SAFE, NOT ACTUALLY LOGGED OUT
-                        }
-                        default -> loop = true;
+        do {
+            loop = false;
+            System.out.println(menuTemplate);
+            try {
+                int selection = context.getSc().nextInt();
+                switch (selection) {
+                    case 1 -> {
+                        context.setMenuState(new ProductSearchMenu());
                     }
-                } catch (Exception e) {
-                    System.out.println(e);
+                    case 2 -> {
+                        context.setMenuState(new CartMenu());
+                    }
+                    case 3 -> {
+                        context.setMenuState(new OrderHistoryMenu());//
+                    }
+                    case 4 -> {
+                        context.setMenuState(new NotificationsMenu());//
+                    }
+                    case 5 -> {
+                        System.out.println("Program exited.");
+                    }
+                    case 6 -> {
+                        context.setMenuState(new LoginMenu());// NOT SAFE, NOT ACTUALLY LOGGED OUT
+                    }
+                    default -> {
+                        System.out.print("\nMasukkan angka yang valid.\n");
+                        context.getSc().nextLine();
+                        loop = true;
+                    }
                 }
-                
-                
-            } while (loop);
+            } catch (Exception e) {
+                System.out.print("\nMasukkan angka yang valid.\n");
+                context.getSc().nextLine();
+                loop = true;
+            }
+
+        } while (loop);
 
     }
 }

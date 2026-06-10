@@ -1,34 +1,34 @@
 import java.util.List;
 
-class UserProductPickerMenu implements MenuState{
+class UserProductPickerMenu implements MenuState {
     @Override
-    public void execute(AppContext context){
+    public void execute(AppContext context) {
         User user = context.getUser();
         ShopDB db = ShopDB.getDB();
         String username = user.getUsername();
-        List<Product> userProducts = db.getActiveProductByUser(username); 
+        List<Product> userProducts = db.getActiveProductByUser(username);
 
-        //list all the active user Products to choose from
-        String menuTemplate = "List Produkmu:\n(i).\t(nama produk)\n";
+        // list all the active user Products to choose from
+        String menuTemplate = "\nList Produkmu:\n(i).\t(nama produk)\n";
 
         int index = 1;
 
         if (userProducts.size() > 0) {
             for (Product product : userProducts) {
-                menuTemplate += index+".\t"+product.getName()+"\n";
+                menuTemplate += index + ".\t" + product.getName() + "\n";
                 index++;
             }
 
             menuTemplate += "Pilih produkmu berdasarkan index:\n";
             System.out.println(menuTemplate);
 
-            //input the index of the product
+            // input the index of the product
             boolean loop = false;
             Product chosenProduct = null;
-            do { 
+            do {
                 loop = false;
                 try {
-                    int chosenIndex = context.sc.nextInt() - 1;
+                    int chosenIndex = context.getSc().nextInt() - 1;
                     chosenProduct = userProducts.get(chosenIndex);
 
                 } catch (Exception e) {
@@ -38,10 +38,11 @@ class UserProductPickerMenu implements MenuState{
 
             } while (loop);
 
-            if (chosenProduct != null) System.out.println("Product chosen:"+ chosenProduct.getName());
+            if (chosenProduct != null)
+                System.out.println("\nProduct chosen:" + chosenProduct.getName());
 
-            
             menuTemplate = """
+
                     1.  Edit Product
                     2.  Cancel
                     """;
@@ -51,7 +52,7 @@ class UserProductPickerMenu implements MenuState{
                 loop = false;
                 System.out.println(menuTemplate);
                 try {
-                    int selection = context.sc.nextInt();
+                    int selection = context.getSc().nextInt();
                     switch (selection) {
                         case 1 -> {
                             context.setMenuState(new EditProductMenu(chosenProduct));
@@ -59,15 +60,21 @@ class UserProductPickerMenu implements MenuState{
                         case 2 -> {
                             context.setMenuState(new ProductManagementMenu());
                         }
-                        
-                        default -> loop = true;
+
+                        default -> {
+                            System.out.print("\nMasukkan angka yang valid.\n");
+                            context.getSc().nextLine();
+                            loop = true;
+                        }
                     }
                 } catch (Exception e) {
-                    System.out.println(e);
+                    System.out.print("\nMasukkan angka yang valid.\n");
+                    context.getSc().nextLine();
+                    loop = true;
                 }
-                    
+
             } while (loop);
-            //index produk sudah terpilih, sekarang beneran edit
+            // index produk sudah terpilih, sekarang beneran edit
         } else {
             System.out.println("""
                     Anda tidak memiliki produk.
