@@ -2,7 +2,7 @@ package org.example.State;
 
 import org.example.Composite.Category;
 import org.example.Composite.Product;
-import org.example.Entity.ShopDB;
+import org.example.Singleton.ShopDB;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,7 +1,9 @@
-package org.example.Entity;
+package org.example.Singleton;
 
 import org.example.Composite.Category;
 import org.example.Composite.Product;
+import org.example.Entity.User;
+import org.example.Entity.Voucher;
 
 import java.util.*;
 

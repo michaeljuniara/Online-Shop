@@ -1,7 +1,7 @@
 package org.example;
 
 import org.example.Composite.Category;
-import org.example.Entity.ShopDB;
+import org.example.Singleton.ShopDB;
 import org.example.Entity.Voucher;
 import org.example.State.AppContext;
 import java.util.Scanner;

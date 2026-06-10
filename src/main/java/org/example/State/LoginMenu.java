@@ -1,6 +1,6 @@
 package org.example.State;
 
-import org.example.Entity.ShopDB;
+import org.example.Singleton.ShopDB;
 
 class LoginMenu implements MenuState {
 

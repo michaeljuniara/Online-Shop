@@ -1,7 +1,7 @@
 package org.example.State;
 
 import org.example.Entity.Cart;
-import org.example.Entity.ShopDB;
+import org.example.Singleton.ShopDB;
 import org.example.Entity.User;
 import org.example.Entity.Voucher;
 

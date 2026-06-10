@@ -1,6 +1,7 @@
 package org.example.Entity;
 
 import org.example.Composite.Product;
+import org.example.Singleton.ShopDB;
 
 import java.util.ArrayList;
 import java.util.Collections;

@@ -1,7 +1,7 @@
 package org.example.State;
 
 import org.example.Composite.Product;
-import org.example.Entity.ShopDB;
+import org.example.Singleton.ShopDB;
 import org.example.Entity.User;
 
 import java.util.List;
