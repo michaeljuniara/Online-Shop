@@ -1,17 +1,33 @@
 package org.example;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+import org.example.Composite.Category;
+import org.example.Entity.ShopDB;
+import org.example.Entity.Voucher;
+import org.example.State.AppContext;
+import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+        Scanner sc = new Scanner(System.in);
+        ShopDB db = ShopDB.getDB();
+        db.registerUser("Ian", "yay");
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
-        }
+        Category electronics = new Category("Electronics");
+        Category laptops = new Category("Laptops");
+        Category phones = new Category("Phones");
+        Category gaming = new Category("Gaming");
+
+        electronics.add(laptops);
+        electronics.add(gaming);
+        db.addCategory(electronics);
+
+        db.addProduct(ShopDB.getDB().loginUser("Ian", "yay"), "kursi", electronics, "aaaaa", 1000, 1);
+        db.addProduct(ShopDB.getDB().loginUser("Ian", "yay"), "pikachu", electronics, "bzzzzzz", 1000, 2);
+
+        Voucher vo1 = new Voucher("min100", 100, 3);
+        db.addVoucher(vo1);
+
+        AppContext context = new AppContext(sc);
+        context.run();
     }
 }
