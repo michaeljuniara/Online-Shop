@@ -3,6 +3,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Scanner;
 
 public class Test {
     // test categoryComponent
@@ -20,21 +21,21 @@ public class Test {
         Product ps5 = new Product(seller, "PlayStation 5 Slim", gaming, "1TB Digital Edition", 8500000.0, 8);
         Product switchOled = new Product(seller, "Nintendo Switch OLED", gaming, "Neon Blue/Red", 4200000.0, 15);
         Product rogAlly = new Product(seller, "ASUS ROG Ally", gaming, "RC71L AMD Z1 Extreme", 11000000.0, 3);
-        
+
         electronics.add(laptops);
         electronics.add(iphone);
         electronics.add(gaming);
-        
+
         laptops.add(macbook);
         laptops.add(dellXps);
         phones.add(iphone);
         gaming.add(rogAlly);
         gaming.add(ps5);
         gaming.add(switchOled);
-        
+
         Locale idrLocale = Locale.of("id", "ID");
         NumberFormat idrFormat = NumberFormat.getCurrencyInstance(idrLocale);
-        
+
         System.out.println("=== Show all ===");
         List<Product> allCatalog = new ArrayList<>();
         electronics.getProducts(allCatalog);
@@ -91,6 +92,6 @@ public class Test {
     }
 
     public static void main(String[] args) {
-        orderObserverTest();
+        new AppContext(new Scanner(System.in)).run();
     }
 }

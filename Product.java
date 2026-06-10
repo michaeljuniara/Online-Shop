@@ -16,8 +16,10 @@ public class Product implements CategoryComponent {
         this.description = description;
         this.price = price;
         this.stock = stock;
+        this.active = true;//change
     }
 
+    @Override
     public void getProducts(List<Product> list) { list.add(this); }
 
     public void deactivate() {
@@ -61,6 +63,11 @@ public class Product implements CategoryComponent {
 
         Product other = (Product) obj;
         return this.name.equals(other.name) && this.category.equals(other.category) && this.owner.equals(other.owner);
+    }
+
+    @Override
+    public String toString() {
+        return name;
     }
 
     public boolean isActive() { return active; }
