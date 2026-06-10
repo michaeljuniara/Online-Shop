@@ -1,10 +1,10 @@
 import java.time.LocalDate;
 
-public class CheckOutFacade implements MenuState {
+public class CheckOutMenu implements MenuState {
     private Voucher voucher;
     private AppContext context;
 
-    public CheckOutFacade(Voucher voucher, AppContext context) {
+    public CheckOutMenu(Voucher voucher, AppContext context) {
         this.voucher = voucher;
         this.context = context;
     }
@@ -28,7 +28,9 @@ public class CheckOutFacade implements MenuState {
                 int input = context.getSc().nextInt();
                 if (input >= 1 && input <= 3) {
                     ps = PaymentFactory.getPaymentMethod(input);
-                    ps.showMetode(totalPrice);
+                    ps.pay(totalPrice);
+                    updateAll();
+                    context.setMenuState(new BuyerMainMenu());
                 } else if (input == 4) {
                     context.setMenuState(new CartMenu());
                 } else {
@@ -42,30 +44,17 @@ public class CheckOutFacade implements MenuState {
                 loop = true;
             }
         } while (loop);
-
-        if (ps != null) {
-            double nominal = -1;
-            boolean fail = false;
-            try {
-                nominal = context.getSc().nextDouble();
-
-            } catch (Exception e) {
-                System.out.print("\nMasukkan angka yang valid.\n");
-                fail = true;
-            }
-
-            boolean pay = ps.pay(totalPrice, nominal);
-            if (pay && !fail) {
-                updateAll();
-                context.setMenuState(new BuyerMainMenu());
-            } else {
-                context.setMenuState(new CartMenu());
-            }
-        }
     }
 
     public void updateAll() {
         User user = context.getUser();
-        user.getBuyTransactions().add(new Transaction(user, LocalDate.now()));
+        Transaction transaction = new Transaction(user, LocalDate.now());
+
+        for (CartItem item : user.getCart().getItems()) {
+            transaction.addOrder(new Order(item, transaction));
+        }
+
+        user.getCart().clearCart();
+        user.addBuyTransaction(transaction);
     }
 }

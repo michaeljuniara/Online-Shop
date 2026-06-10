@@ -20,7 +20,7 @@ class BuyMenu implements MenuState {
                         context.setMenuState(new AddVoucherMenu());
                     }
                     case 2 -> {
-                        context.setMenuState(new CheckOutFacade(null, context));
+                        context.setMenuState(new CheckOutMenu(null, context));
                     }
                     case 3 -> {
                         context.setMenuState(new CartMenu());

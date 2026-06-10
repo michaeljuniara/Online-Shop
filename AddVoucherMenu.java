@@ -12,7 +12,7 @@ class AddVoucherMenu implements MenuState {
                 String inputtedCode = context.getSc().next();
                 if (userCart.setVoucher(inputtedCode)) {
                     Voucher v = ShopDB.getDB().getVoucher(inputtedCode);
-                    context.setMenuState(new CheckOutFacade(v, context));
+                    context.setMenuState(new CheckOutMenu(v, context));
                 } else {
                     System.out.println("\nKode Voucher salah\n");
                     context.setMenuState(new BuyMenu());
