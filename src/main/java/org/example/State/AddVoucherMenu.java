@@ -8,7 +8,7 @@ import org.example.Entity.Voucher;
 class AddVoucherMenu implements MenuState {
     @Override
     public void execute(AppContext context) {
-        String menuTemplate = "\nMasukkan kode voucher : ";
+        String menuTemplate = "\nMasukkan kode voucher: ";
         User user = context.getUser();
         Cart userCart = user.getCart();
         boolean loop = false;

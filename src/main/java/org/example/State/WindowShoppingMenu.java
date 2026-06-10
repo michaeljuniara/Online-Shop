@@ -29,7 +29,7 @@ class WindowShoppingMenu implements MenuState {
             index++;
         }
 
-        menuTemplate += "Pilih (i) dari list produk: ";
+        menuTemplate += "Pilih (i) dari list produk:";
         System.out.print(menuTemplate);
 
         // input the index of the product
@@ -49,7 +49,7 @@ class WindowShoppingMenu implements MenuState {
         } while (loop);
 
         if (chosenProduct != null)
-            System.out.println("\nProduk yang dipilih : " + chosenProduct.getName());
+            System.out.println("\nProduk yang dipilih: " + chosenProduct.getName());
 
         menuTemplate = """
                 1. Lihat Detail Produk

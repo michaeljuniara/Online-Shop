@@ -12,7 +12,7 @@ class NotificationsMenu implements MenuState {
         String menuTemplate = "";
         int index = 1;
         for (Notification notif : notifications) {
-            menuTemplate += "" + index + ".\t" + notif.toString() + "\n";
+            menuTemplate += "" + index + ".\t[" + notif.getTimestamp().toLocalDate().toString() + "] " + notif.getMessage() + "\n";
             index++;
         }
         menuTemplate += "Enter 1 to go back to main menu.";

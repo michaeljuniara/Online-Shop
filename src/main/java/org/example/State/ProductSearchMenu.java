@@ -11,8 +11,7 @@ class ProductSearchMenu implements MenuState {
     @Override
     public void execute(AppContext context) {
         String menuTemplate = """
-                Pilih metode mencari produk:
-                
+                Pilih metode mencari produk: 
                 1.  Cari berdasarkan nama
                 2.  Cari berdasarkan kategori
                 3.  Tampilkan semua produk

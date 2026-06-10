@@ -48,7 +48,6 @@ class UserProductPickerMenu implements MenuState {
                 System.out.println("\nProduct chosen:" + chosenProduct.getName());
 
             menuTemplate = """
-                    
                     1.  Edit Product
                     2.  Cancel
                     """;

@@ -26,7 +26,12 @@ public class CheckOutMenu implements MenuState {
         }
         double totalPrice = context.getUser().getCart().calculateTotal() - discount;
         String menuTemplate = String
-                .format("\nDetail harga : %.2f\nList Metode Pembayaran\n1. BCA\n2. Gopay\n3. QRIS\n4. Kembali\n",
+                .format("\n" +  "Detail harga: %.2f\n" +
+                                "List Metode Pembayaran\n" +
+                                "1. BCA\n" +
+                                "2. Gopay\n" +
+                                "3. QRIS\n" +
+                                "4. Kembali\n",
                         totalPrice);
         boolean loop = false;
         PaymentStrategy ps = null;

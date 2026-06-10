@@ -5,11 +5,11 @@ import org.example.Entity.ShopDB;
 class LoginMenu implements MenuState {
 
     public void execute(AppContext context) {
-        String menuTemplate = "--------LOGIN----------\nUsername    : ";
+        String menuTemplate = "--------LOGIN----------\nUsername: ";
         System.out.print(menuTemplate);
 
         String inUsername = context.getSc().next();
-        System.out.print("Password    : ");
+        System.out.print("Password: ");
         String inPassword = context.getSc().next();
         ShopDB DBInstance = ShopDB.getDB();
         boolean loginSuccessful = context.setUser(DBInstance.loginUser(inUsername, inPassword));

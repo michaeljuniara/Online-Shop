@@ -17,7 +17,7 @@ class CategoryPickerMenu {
             menuTemplate += index + ".\t" + category.getName() + "\n";
             index++;
         }
-        menuTemplate += "\nPilih kategori berdasarkan index : ";
+        menuTemplate += "\nPilih kategori berdasarkan index: ";
 
         boolean loop = false;
         do {

@@ -9,7 +9,7 @@ class CreateProductMenu implements MenuState {
     public void execute(AppContext context) {
         User user = context.getUser();
 
-        System.out.print("Nama : ");
+        System.out.print("Nama: ");
         context.getSc().nextLine();
         String name = context.getSc().nextLine();
 
@@ -19,21 +19,21 @@ class CreateProductMenu implements MenuState {
         cpm.chooseCategory(context);
         Category category = cpm.getChosenCategory();
 
-        System.out.print("\nDeskripsi : ");
+        System.out.print("\nDeskripsi: ");
         context.getSc().nextLine();
         String description = context.getSc().nextLine();
 
-        System.out.print("Harga : ");
+        System.out.print("Harga: ");
         double price = context.getSc().nextDouble();
 
-        System.out.print("Stok tersedia : ");
+        System.out.print("Stok tersedia: ");
         int stock = context.getSc().nextInt();
 
         // pilihannya adalah untuk buat produk atau kembali ke product management menu
         // (Cancel)
         String menuTemplate = """
-                    1.  Create
-                    2.  Cancel
+                1.  Create
+                2.  Cancel
                 """;
         boolean loop = false;
         do {

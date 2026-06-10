@@ -13,7 +13,6 @@ class CartMenu implements MenuState {
 
         List<CartItem> userCartItems = userCart.getItems();
         String menuTemplate = """
-                
                 Isi Keranjang:
                 (i). Nama produk - Kuantitas - Total Harga
                 """;
@@ -23,14 +22,14 @@ class CartMenu implements MenuState {
         // tampilkan semua product
         for (CartItem cartItem : userCartItems) {
             menuTemplate += String.format(
-                    "%3d. " + cartItem.getProduct().getName() + " - " + cartItem.getQuantity() + " - %.2f\n", index,
+                    "%d. " + cartItem.getProduct().getName() + " - " + cartItem.getQuantity() + " - %.2f\n", index,
                     cartItem.getTotalPrice());
             index++;
         }
         menuTemplate += """
                 (i). Lihat Detail
-                 0 . Beli
-                -1 . Cancel
+                 0. Beli
+                -1. Cancel
                 """;
 
         boolean loop = false;

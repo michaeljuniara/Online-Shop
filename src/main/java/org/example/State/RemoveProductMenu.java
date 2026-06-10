@@ -19,7 +19,7 @@ class RemoveProductMenu implements MenuState {
 
         int index = 1;
 
-        if (userProducts.size() > 0) {
+        if (!userProducts.isEmpty()) {
             for (Product product : userProducts) {
                 menuTemplate += index + ".\t" + product.getName() + "\n";
                 index++;

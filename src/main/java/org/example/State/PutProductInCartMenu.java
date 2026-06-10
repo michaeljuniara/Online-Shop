@@ -14,11 +14,10 @@ class PutProductInCartMenu implements MenuState {
     public void execute(AppContext context) {
         String menuTemplate = """
                 Detail Produk:
-                
                 """;
         //beri detail produk
-        menuTemplate += "Nama: " + chosenProduct.getName() + " Harga: " + chosenProduct.getPrice() +
-                " Stok: " + chosenProduct.getStock() + " Deskripsi: " + chosenProduct.getDescription() + "\n";
+        menuTemplate += "Nama: " + chosenProduct.getName() + " | Harga: " + chosenProduct.getPrice() +
+                " | Stok: " + chosenProduct.getStock() + " | Deskripsi: " + chosenProduct.getDescription() + "\n";
 
         menuTemplate += """
                 1.  Tambahkan ke keranjang
